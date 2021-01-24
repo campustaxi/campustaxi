@@ -12,7 +12,9 @@
   "dependencies": {
     "@emotion/native": "^11.0.0",
     "@emotion/react": "^11.1.4",
+    "@react-native-async-storage/async-storage": "^1.13.3",
     "@react-native-community/masked-view": "^0.1.10",
+    "@react-native-seoul/kakao-login": "^2.10.2",
     "@react-navigation/bottom-tabs": "^5.11.6",
     "@react-navigation/native": "^5.9.2",
     "@react-navigation/stack": "^5.14.1",
@@ -22,7 +24,8 @@
     "react-native-reanimated": "^1.13.2",
     "react-native-safe-area-context": "^3.1.9",
     "react-native-screens": "^2.15.2",
-    "react-native-splash-screen": "^3.2.0"
+    "react-native-splash-screen": "^3.2.0",
+    "react-native-svg": "^12.1.0"
   },
   "devDependencies": {
     "@babel/core": "^7.8.4",

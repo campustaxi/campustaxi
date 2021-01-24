@@ -1,9 +1,13 @@
 import styled from '@emotion/native';
+import KakaoLogins from '@react-native-seoul/kakao-login';
 import { StackNavigationProp } from '@react-navigation/stack';
-import React from 'react';
+import React, { useState } from 'react';
 import { SafeAreaView } from 'react-native';
 import image from '../../../images/login/bg.png';
+import { BaseButton } from '../../components/button/BaseButton';
+import { KakaoIcon } from '../../components/icon/KakaoIcon';
 import { Logo } from '../../components/logo/Logo';
+import { useAuthContext } from '../../contexts/AuthContext';
 import { LoginStackParamList } from './LoginNavigation';
 
 type LoginScreenNavigationProp = StackNavigationProp<LoginStackParamList, 'LoginScreen'>;
@@ -11,15 +15,35 @@ type LoginScreenNavigationProp = StackNavigationProp<LoginStackParamList, 'Login
 type Props = {
   navigation: LoginScreenNavigationProp;
 };
-export const LoginScreen: React.FC<Props> = ({ navigation }) => {
-  return (
+export const LoginScreen: React.FC<Props> = () => {
+  const [isSimpleLogin, setIsSimpleLogin] = useState(false);
+  const { setLoggedIn } = useAuthContext();
+
+  return isSimpleLogin ? (
     <Background source={image}>
       <SafeAreaView>
         <LoginContainer>
           <Logo />
-          <LoginText onPress={() => navigation.navigate('SimpleLoginScreen')}>
-            일반 로그인 및 회원가입
-          </LoginText>
+          <LoginText onPress={() => setLoggedIn('hello')}>simple</LoginText>
+        </LoginContainer>
+      </SafeAreaView>
+    </Background>
+  ) : (
+    <Background source={image}>
+      <SafeAreaView>
+        <LoginContainer>
+          <Logo />
+          <LoginButtonContainer>
+            <BaseButton
+              onPress={() => {
+                KakaoLogins.login([2]);
+              }}
+              backgroundColor="#fdec00"
+              icon={<KakaoIcon />}>
+              카카오 로그인
+            </BaseButton>
+            <BaseButton onPress={() => setIsSimpleLogin(true)}>일반 로그인 및 회원가입</BaseButton>
+          </LoginButtonContainer>
         </LoginContainer>
       </SafeAreaView>
     </Background>
@@ -38,6 +62,8 @@ const LoginContainer = styled.View`
   justify-content: space-between;
   align-items: center;
 `;
+
+const LoginButtonContainer = styled.View``;
 
 const LoginText = styled.Text`
   font-size: 20px;

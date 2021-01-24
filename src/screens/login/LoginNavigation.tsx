@@ -1,7 +1,6 @@
 import { createStackNavigator } from '@react-navigation/stack';
 import React from 'react';
 import { LoginScreen } from './LoginScreen';
-import { SimpleLoginScreen } from './SimpleLoginScreen';
 
 export type LoginStackParamList = {
   LoginScreen: undefined;
@@ -13,7 +12,6 @@ export const LoginNavigation = () => {
   return (
     <LoginStack.Navigator initialRouteName="LoginScreen" headerMode="none">
       <LoginStack.Screen name="LoginScreen" component={LoginScreen} />
-      <LoginStack.Screen name="SimpleLoginScreen" component={SimpleLoginScreen} />
     </LoginStack.Navigator>
   );
 };
