@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">CampusTaxi</string>
+    <string name="kakao_app_key">0e8db7b8038b44dc4db29d8902cff2c3</string>
 </resources>

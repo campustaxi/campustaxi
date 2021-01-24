@@ -1,5 +1,5 @@
 import styled from '@emotion/native';
-import KakaoLogins from '@react-native-seoul/kakao-login';
+import KakaoLogins, { KAKAO_AUTH_TYPES } from '@react-native-seoul/kakao-login';
 import { StackNavigationProp } from '@react-navigation/stack';
 import React, { useState } from 'react';
 import { SafeAreaView } from 'react-native';
@@ -36,7 +36,7 @@ export const LoginScreen: React.FC<Props> = () => {
           <LoginButtonContainer>
             <BaseButton
               onPress={() => {
-                KakaoLogins.login([2]);
+                KakaoLogins.login([KAKAO_AUTH_TYPES.Talk]);
               }}
               backgroundColor="#fdec00"
               icon={<KakaoIcon />}>
