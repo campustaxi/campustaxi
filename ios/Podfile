@@ -8,10 +8,10 @@ target 'CampusTaxi' do
 
   use_react_native!(:path => config["reactNativePath"])
 
-  target 'CampusTaxiTests' do
-    inherit! :complete
-    # Pods for testing
-  end
+  # target 'CampusTaxiTests' do
+  #   inherit! :complete
+  #   # Pods for testing
+  # end
 
   # Enables Flipper.
   #
@@ -20,14 +20,5 @@ target 'CampusTaxi' do
   use_flipper!
   post_install do |installer|
     flipper_post_install(installer)
-  end
-end
-
-target 'CampusTaxi-tvOS' do
-  # Pods for CampusTaxi-tvOS
-
-  target 'CampusTaxi-tvOSTests' do
-    inherit! :search_paths
-    # Pods for testing
   end
 end
