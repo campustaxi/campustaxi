@@ -4,15 +4,22 @@ import React, { ReactNode } from 'react';
 type Props = {
   onPress: () => void;
   icon?: ReactNode;
+  color?: string;
   backgroundColor?: string;
 };
 
-export const BaseButton: React.FC<Props> = ({ children, onPress, icon, backgroundColor }) => {
+export const BaseButton: React.FC<Props> = ({
+  children,
+  onPress,
+  icon,
+  color,
+  backgroundColor,
+}) => {
   return (
     <Box onPress={onPress} backgroundColor={backgroundColor}>
       <Container>
         {icon && <IconConatiner>{icon}</IconConatiner>}
-        <ChildrenText>{children}</ChildrenText>
+        <ChildrenText color={color}>{children}</ChildrenText>
       </Container>
     </Box>
   );
@@ -27,8 +34,8 @@ const Box = styled.TouchableOpacity<{ backgroundColor?: string }>`
 
 const Container = styled.View`
   flex-direction: row;
-  padding-left: 36px;
-  padding-right: 36px;
+  padding-left: 64px;
+  padding-right: 64px;
   padding-top: 16px;
   padding-bottom: 16px;
 `;
@@ -37,6 +44,7 @@ const IconConatiner = styled.View`
   margin-right: 8px;
 `;
 
-const ChildrenText = styled.Text`
-  font-size: 24px;
+const ChildrenText = styled.Text<{ color?: string }>`
+  font-size: 18px;
+  color: ${({ color }) => color};
 `;

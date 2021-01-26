@@ -18,6 +18,8 @@ type Props = {
 };
 export const LoginScreen: React.FC<Props> = () => {
   const [isSimpleLogin, setIsSimpleLogin] = useState(false);
+  const [id, setId] = useState('');
+  const [password, setPassword] = useState('');
   const { setLoggedIn } = useAuthContext();
   const handleAppleLogin = async () => {
     // performs login request
@@ -39,34 +41,76 @@ export const LoginScreen: React.FC<Props> = () => {
   };
   return isSimpleLogin ? (
     <Background source={image}>
-      <SafeAreaView>
-        <LoginContainer>
-          <Logo />
-          <LoginText onPress={() => setLoggedIn('hello')}>simple</LoginText>
-        </LoginContainer>
-      </SafeAreaView>
+      <Overlay>
+        <SafeAreaView>
+          <LoginContainer>
+            <Logo />
+            <LoginContentContainer>
+              <LoginInput
+                value={id}
+                onChangeText={setId}
+                placeholder="아이디 입력"
+                placeholderTextColor="white"
+              />
+              <InputBorder />
+              <LoginInput
+                value={password}
+                onChangeText={setPassword}
+                placeholder="비밀번호 입력"
+                placeholderTextColor="white"
+              />
+              <InputBorder />
+              <FindContainer>
+                <FindText>아이디 찾기</FindText>
+                <InputVerticalBorder />
+                <FindText>비밀번호 찾기</FindText>
+              </FindContainer>
+              <ButtonContainer>
+                <BaseButton
+                  onPress={() => setLoggedIn('hello')}
+                  backgroundColor="rgb(237, 237, 237)">
+                  로그인하기
+                </BaseButton>
+              </ButtonContainer>
+              <ButtonContainer>
+                <BaseButton onPress={() => setLoggedIn('hello')} color="white">
+                  회원가입
+                </BaseButton>
+              </ButtonContainer>
+            </LoginContentContainer>
+          </LoginContainer>
+        </SafeAreaView>
+      </Overlay>
     </Background>
   ) : (
     <Background source={image}>
       <SafeAreaView>
         <LoginContainer>
           <Logo />
-          <LoginButtonContainer>
-            <BaseButton
-              onPress={() => {
-                KakaoLogins.login([KAKAO_AUTH_TYPES.Talk]);
-              }}
-              backgroundColor="#fdec00"
-              icon={<KakaoIcon />}>
-              카카오 로그인
-            </BaseButton>
-            {Platform.OS === 'ios' && (
-              <BaseButton onPress={handleAppleLogin} backgroundColor="white" icon={<KakaoIcon />}>
-                애플 로그인
+          <LoginContentContainer>
+            <ButtonContainer>
+              <BaseButton
+                onPress={() => {
+                  KakaoLogins.login([KAKAO_AUTH_TYPES.Talk]);
+                }}
+                backgroundColor="#fdec00"
+                icon={<KakaoIcon />}>
+                카카오 로그인
               </BaseButton>
+            </ButtonContainer>
+            {Platform.OS === 'ios' && (
+              <ButtonContainer>
+                <BaseButton onPress={handleAppleLogin} backgroundColor="white" icon={<KakaoIcon />}>
+                  애플 로그인
+                </BaseButton>
+              </ButtonContainer>
             )}
-            <BaseButton onPress={() => setIsSimpleLogin(true)}>일반 로그인 및 회원가입</BaseButton>
-          </LoginButtonContainer>
+            <ButtonContainer>
+              <BaseButton onPress={() => setIsSimpleLogin(true)}>
+                일반 로그인 및 회원가입
+              </BaseButton>
+            </ButtonContainer>
+          </LoginContentContainer>
         </LoginContainer>
       </SafeAreaView>
     </Background>
@@ -86,8 +130,47 @@ const LoginContainer = styled.View`
   align-items: center;
 `;
 
-const LoginButtonContainer = styled.View``;
+const LoginContentContainer = styled.View`
+  align-items: center;
+`;
 
-const LoginText = styled.Text`
-  font-size: 20px;
+const LoginInput = styled.TextInput`
+  height: 20px;
+  margin-bottom: 16px;
+  color: white;
+  font-size: 18px;
+`;
+
+const InputBorder = styled.View`
+  width: 211px;
+  border: 1px solid #f0f0f0;
+  margin-bottom: 36px;
+`;
+
+const InputVerticalBorder = styled.View`
+  height: 12px;
+  border: 1px solid #f0f0f0;
+  margin-left: 16px;
+  margin-right: 16px;
+`;
+
+const ButtonContainer = styled.View`
+  margin-bottom: 8px;
+`;
+
+const FindContainer = styled.View`
+  flex-direction: row;
+  margin-bottom: 16px;
+`;
+
+const FindText = styled.Text`
+  color: white;
+`;
+
+const Overlay = styled.View`
+  flex: 1;
+  width: 100%;
+  align-items: center;
+  background-color: rgba(0, 0, 0, 0.47);
+  opacity: 0.8;
 `;
