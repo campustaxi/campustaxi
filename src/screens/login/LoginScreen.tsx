@@ -16,7 +16,7 @@ type LoginScreenNavigationProp = StackNavigationProp<LoginStackParamList, 'Login
 type Props = {
   navigation: LoginScreenNavigationProp;
 };
-export const LoginScreen: React.FC<Props> = () => {
+export const LoginScreen: React.FC<Props> = ({ navigation }) => {
   const [isSimpleLogin, setIsSimpleLogin] = useState(false);
   const [id, setId] = useState('');
   const [password, setPassword] = useState('');
@@ -36,7 +36,7 @@ export const LoginScreen: React.FC<Props> = () => {
 
     // use credentialState response to ensure the user is authenticated
     if (credentialState === appleAuth.State.AUTHORIZED) {
-      // user is authenticated
+      // user is authenticateda
     }
   };
   return isSimpleLogin ? (
@@ -61,7 +61,9 @@ export const LoginScreen: React.FC<Props> = () => {
               />
               <InputBorder />
               <FindContainer>
-                <FindText>아이디 찾기</FindText>
+                <FindText onPress={() => navigation.navigate('FindIdNavigation')}>
+                  아이디 찾기
+                </FindText>
                 <InputVerticalBorder />
                 <FindText>비밀번호 찾기</FindText>
               </FindContainer>
