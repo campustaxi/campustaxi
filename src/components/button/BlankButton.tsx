@@ -8,7 +8,7 @@ type Props = {
   backgroundColor?: string;
 };
 
-export const BaseButton: React.FC<Props> = ({
+export const BlankButton: React.FC<Props> = ({
   children,
   onPress,
   icon,

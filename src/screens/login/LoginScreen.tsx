@@ -5,8 +5,9 @@ import { StackNavigationProp } from '@react-navigation/stack';
 import React, { useState } from 'react';
 import { Platform, SafeAreaView } from 'react-native';
 import image from '../../../images/login/bg.png';
-import { BaseButton } from '../../components/button/BaseButton';
+import { BlankButton } from '../../components/button/BlankButton';
 import { KakaoIcon } from '../../components/icon/KakaoIcon';
+import { BlankBackground } from '../../components/layout/BlankBackground';
 import { Logo } from '../../components/logo/Logo';
 import { useAuthContext } from '../../contexts/AuthContext';
 import { LoginStackParamList } from './LoginNavigation';
@@ -40,82 +41,89 @@ export const LoginScreen: React.FC<Props> = ({ navigation }) => {
     }
   };
   return isSimpleLogin ? (
-    <Background source={image}>
-      <Overlay>
+    <BlankBackground>
+      <Background source={image}>
+        <Overlay>
+          <SafeAreaView>
+            <LoginContainer>
+              <Logo />
+              <LoginContentContainer>
+                <LoginInput
+                  value={id}
+                  onChangeText={setId}
+                  placeholder="아이디 입력"
+                  placeholderTextColor="white"
+                />
+                <InputBorder />
+                <LoginInput
+                  value={password}
+                  onChangeText={setPassword}
+                  placeholder="비밀번호 입력"
+                  placeholderTextColor="white"
+                />
+                <InputBorder />
+                <FindContainer>
+                  <FindText onPress={() => navigation.navigate('FindIdNavigation')}>
+                    아이디 찾기
+                  </FindText>
+                  <InputVerticalBorder />
+                  <FindText>비밀번호 찾기</FindText>
+                </FindContainer>
+                <ButtonContainer>
+                  <BlankButton
+                    onPress={() => setLoggedIn('hello')}
+                    backgroundColor="rgb(237, 237, 237)">
+                    로그인하기
+                  </BlankButton>
+                </ButtonContainer>
+                <ButtonContainer>
+                  <BlankButton onPress={() => setLoggedIn('hello')} color="white">
+                    회원가입
+                  </BlankButton>
+                </ButtonContainer>
+              </LoginContentContainer>
+            </LoginContainer>
+          </SafeAreaView>
+        </Overlay>
+      </Background>
+    </BlankBackground>
+  ) : (
+    <BlankBackground>
+      <Background source={image}>
         <SafeAreaView>
           <LoginContainer>
             <Logo />
             <LoginContentContainer>
-              <LoginInput
-                value={id}
-                onChangeText={setId}
-                placeholder="아이디 입력"
-                placeholderTextColor="white"
-              />
-              <InputBorder />
-              <LoginInput
-                value={password}
-                onChangeText={setPassword}
-                placeholder="비밀번호 입력"
-                placeholderTextColor="white"
-              />
-              <InputBorder />
-              <FindContainer>
-                <FindText onPress={() => navigation.navigate('FindIdNavigation')}>
-                  아이디 찾기
-                </FindText>
-                <InputVerticalBorder />
-                <FindText>비밀번호 찾기</FindText>
-              </FindContainer>
               <ButtonContainer>
-                <BaseButton
-                  onPress={() => setLoggedIn('hello')}
-                  backgroundColor="rgb(237, 237, 237)">
-                  로그인하기
-                </BaseButton>
+                <BlankButton
+                  onPress={() => {
+                    KakaoLogins.login([KAKAO_AUTH_TYPES.Talk]);
+                  }}
+                  backgroundColor="#fdec00"
+                  icon={<KakaoIcon />}>
+                  카카오 로그인
+                </BlankButton>
               </ButtonContainer>
+              {Platform.OS === 'ios' && (
+                <ButtonContainer>
+                  <BlankButton
+                    onPress={handleAppleLogin}
+                    backgroundColor="white"
+                    icon={<KakaoIcon />}>
+                    애플 로그인
+                  </BlankButton>
+                </ButtonContainer>
+              )}
               <ButtonContainer>
-                <BaseButton onPress={() => setLoggedIn('hello')} color="white">
-                  회원가입
-                </BaseButton>
+                <BlankButton onPress={() => setIsSimpleLogin(true)}>
+                  일반 로그인 및 회원가입
+                </BlankButton>
               </ButtonContainer>
             </LoginContentContainer>
           </LoginContainer>
         </SafeAreaView>
-      </Overlay>
-    </Background>
-  ) : (
-    <Background source={image}>
-      <SafeAreaView>
-        <LoginContainer>
-          <Logo />
-          <LoginContentContainer>
-            <ButtonContainer>
-              <BaseButton
-                onPress={() => {
-                  KakaoLogins.login([KAKAO_AUTH_TYPES.Talk]);
-                }}
-                backgroundColor="#fdec00"
-                icon={<KakaoIcon />}>
-                카카오 로그인
-              </BaseButton>
-            </ButtonContainer>
-            {Platform.OS === 'ios' && (
-              <ButtonContainer>
-                <BaseButton onPress={handleAppleLogin} backgroundColor="white" icon={<KakaoIcon />}>
-                  애플 로그인
-                </BaseButton>
-              </ButtonContainer>
-            )}
-            <ButtonContainer>
-              <BaseButton onPress={() => setIsSimpleLogin(true)}>
-                일반 로그인 및 회원가입
-              </BaseButton>
-            </ButtonContainer>
-          </LoginContentContainer>
-        </LoginContainer>
-      </SafeAreaView>
-    </Background>
+      </Background>
+    </BlankBackground>
   );
 };
 
