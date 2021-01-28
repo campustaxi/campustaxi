@@ -1,6 +1,7 @@
 import styled from '@emotion/native';
 import appleAuth from '@invertase/react-native-apple-authentication';
 import KakaoLogins, { KAKAO_AUTH_TYPES } from '@react-native-seoul/kakao-login';
+import { useNavigation } from '@react-navigation/native';
 import { StackNavigationProp } from '@react-navigation/stack';
 import React, { useState } from 'react';
 import { Platform, SafeAreaView } from 'react-native';
@@ -12,12 +13,10 @@ import { Logo } from '../../components/logo/Logo';
 import { useAuthContext } from '../../contexts/AuthContext';
 import { LoginStackParamList } from './LoginNavigation';
 
-type LoginScreenNavigationProp = StackNavigationProp<LoginStackParamList, 'LoginScreen'>;
+type LoginScreenNavigation = StackNavigationProp<LoginStackParamList, 'LoginScreen'>;
 
-type Props = {
-  navigation: LoginScreenNavigationProp;
-};
-export const LoginScreen: React.FC<Props> = ({ navigation }) => {
+export const LoginScreen: React.FC = ({}) => {
+  const { navigate } = useNavigation<LoginScreenNavigation>();
   const [isSimpleLogin, setIsSimpleLogin] = useState(false);
   const [id, setId] = useState('');
   const [password, setPassword] = useState('');
@@ -63,11 +62,11 @@ export const LoginScreen: React.FC<Props> = ({ navigation }) => {
                 />
                 <InputBorder />
                 <FindContainer>
-                  <FindText onPress={() => navigation.navigate('FindIdNavigation')}>
-                    아이디 찾기
-                  </FindText>
+                  <FindText onPress={() => navigate('FindIdNavigation')}>아이디 찾기</FindText>
                   <InputVerticalBorder />
-                  <FindText>비밀번호 찾기</FindText>
+                  <FindText onPress={() => navigate('FindPasswordNaviagtion')}>
+                    비밀번호 찾기
+                  </FindText>
                 </FindContainer>
                 <ButtonContainer>
                   <BlankButton
