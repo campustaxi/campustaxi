@@ -1,27 +1,40 @@
 import styled from '@emotion/native';
-import { RouteProp } from '@react-navigation/native';
+import { RouteProp, useNavigation, useRoute } from '@react-navigation/native';
 import { StackNavigationProp } from '@react-navigation/stack';
 import React from 'react';
-import { Text } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
+import { SimpleButton } from '../../../components/button/SimpleButton';
 import { BlankBackground } from '../../../components/layout/BlankBackground';
+import { LoginStackParamList } from '../LoginNavigation';
 import { FindIdStackParamList } from './FindIdNaviagtion';
 
-type FoundScreenRouteProp = RouteProp<FindIdStackParamList, 'FoundScreen'>;
-type FoundScreenNavigationProp = StackNavigationProp<FindIdStackParamList, 'FoundScreen'>;
+type LoginNavigation = StackNavigationProp<LoginStackParamList, 'FindIdNavigation'>;
+type FindIdRoute = RouteProp<FindIdStackParamList, 'FoundScreen'>;
 
-type Props = {
-  route: FoundScreenRouteProp;
-  navigation: FoundScreenNavigationProp;
-};
-export const FoundScreen: React.FC<Props> = ({ route }) => {
+export const FoundScreen: React.FC = ({}) => {
+  const { navigate } = useNavigation<LoginNavigation>();
+  const { params } = useRoute<FindIdRoute>();
+
   return (
     <BlankBackground>
       <SafeAreaView>
         <Container>
-          <Text>회원님의 아이디는</Text>
-          <Result>{route.params.id}</Result>
-          <Text>입니다</Text>
+          <Content>회원님의 아이디는</Content>
+          <Result>{params.id}</Result>
+          <Content>입니다</Content>
+          <ButtonContainer>
+            <ButtonWrapper>
+              <SimpleButton
+                onPress={() => {
+                  navigate('LoginScreen');
+                }}>
+                로그인 하러 가기
+              </SimpleButton>
+            </ButtonWrapper>
+            <ButtonWrapper>
+              <SimpleButton onPress={() => {}}>비밀번호 찾기</SimpleButton>
+            </ButtonWrapper>
+          </ButtonContainer>
         </Container>
       </SafeAreaView>
     </BlankBackground>
@@ -33,9 +46,22 @@ const Container = styled.View`
   align-items: center;
 `;
 
+const Content = styled.Text`
+  margin-bottom: 8px;
+`;
+
 const Result = styled.Text`
   width: 70%;
   text-align: center;
   padding: 8px;
   border: 2px solid rgba(149, 149, 149, 0.09);
+  margin-bottom: 8px;
+`;
+
+const ButtonWrapper = styled.View`
+  margin-bottom: 16px;
+`;
+
+const ButtonContainer = styled.View`
+  margin-top: 96px;
 `;

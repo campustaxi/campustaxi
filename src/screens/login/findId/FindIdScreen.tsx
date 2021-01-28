@@ -1,4 +1,5 @@
 import styled, { css } from '@emotion/native';
+import { useNavigation } from '@react-navigation/native';
 import { StackNavigationProp } from '@react-navigation/stack';
 import React, { useState } from 'react';
 import { SafeAreaView } from 'react-native';
@@ -8,19 +9,18 @@ import RadioForm, {
   RadioButtonInput,
   RadioButtonLabel,
 } from 'react-native-simple-radio-button';
-import { BlankButton } from '../../../components/button/BlankButton';
+import { SimpleButton } from '../../../components/button/SimpleButton';
 import { BlankBackground } from '../../../components/layout/BlankBackground';
 import { FindIdStackParamList } from './FindIdNaviagtion';
 
-type FindIdScreenNavigationProp = StackNavigationProp<FindIdStackParamList, 'FindIdScreen'>;
+type FindIdNavigation = StackNavigationProp<FindIdStackParamList, 'FindIdScreen'>;
 
-type Props = {
-  navigation: FindIdScreenNavigationProp;
-};
 enum FindMethod {
   PHONE = 'phone',
 }
-export const FindIdScreen: React.FC<Props> = ({ navigation }) => {
+
+export const FindIdScreen: React.FC = ({}) => {
+  const { navigate } = useNavigation<FindIdNavigation>();
   const [method, setMethod] = useState<FindMethod>();
   const [name, setName] = useState('');
   const [phoneCountry, setPhoneCountry] = useState('');
@@ -94,14 +94,13 @@ export const FindIdScreen: React.FC<Props> = ({ navigation }) => {
                     keyboardType="phone-pad"
                   />
                 </PhoneContainer>
-                <BlankButton
+                <SimpleButton
                   onPress={() => {
                     setSent(true);
                   }}
-                  backgroundColor={sent ? '#CBCED7' : '#172864'}
-                  color="white">
+                  clicked={sent}>
                   {sent ? '재전송하기' : '인증번호 전송하기'}
-                </BlankButton>
+                </SimpleButton>
                 {sent && (
                   <SentContainer>
                     <FindInput
@@ -113,14 +112,14 @@ export const FindIdScreen: React.FC<Props> = ({ navigation }) => {
                       keyboardType="numeric"
                     />
                     <Description>인증번호가 오지 않나요?</Description>
-                    <BlankButton
+                    <SimpleButton
                       onPress={() => {
-                        navigation.navigate('FoundScreen', { id: 'hw6110' });
-                      }}
-                      backgroundColor="#172864"
-                      color="white">
+                        navigate('FoundScreen', {
+                          id: 'hw6110',
+                        });
+                      }}>
                       확인
-                    </BlankButton>
+                    </SimpleButton>
                   </SentContainer>
                 )}
               </>
