@@ -3,7 +3,7 @@ import Svg, { Path } from 'react-native-svg';
 
 export const NotificationIcon: React.FC<{ focused?: boolean }> = ({ focused }) => {
   return (
-    <Svg viewBox="0 0 24 24">
+    <Svg width="24" height="24" viewBox="0 0 24 24">
       <Path fill="none" d="M0 0h24v24H0z" />
       <Path
         fill={focused ? '#FF9515' : '#707070'}

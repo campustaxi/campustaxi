@@ -19,7 +19,14 @@ const HomeTab = createBottomTabNavigator<HomeTabParamList>();
 
 export const HomeTabNavigation = () => {
   return (
-    <HomeTab.Navigator initialRouteName="HomeTabScreen" screenOptions={{ title: '' }}>
+    <HomeTab.Navigator
+      initialRouteName="HomeTabScreen"
+      screenOptions={{ title: '' }}
+      tabBarOptions={{
+        iconStyle: {
+          marginTop: 16,
+        },
+      }}>
       <HomeTab.Screen
         name="HomeTabScreen"
         component={HomeTabScreen}
