@@ -1,7 +1,6 @@
 import styled from '@emotion/native';
 import { StackNavigationProp } from '@react-navigation/stack';
 import React from 'react';
-import { SafeAreaView } from 'react-native';
 import { ScrollView } from 'react-native-gesture-handler';
 import { NotificationMessageIcon } from '../../components/icon/notification/NotificationMessageIcon';
 import { NotificationStackParamList } from './NotificationNavigation';
@@ -17,54 +16,21 @@ type Props = {
 
 const datas = [
   {
+    id: 1,
     title: '새로운 메세지',
     description: '‘하드스틱’님께서 메세지를 보냈습니다.',
     type: 'message',
     time: '오후 12:22',
   },
   {
+    id: 2,
     title: '친구초대 이벤트',
     description: '친구초대해서 5000원 득템하자!]\n개이득 택시!',
     type: 'message',
     time: '오후 12:22',
   },
   {
-    title: '새로운 메세지',
-    description: '‘하드스틱’님께서 메세지를 보냈습니다.',
-    type: 'message',
-    time: '오후 12:22',
-  },
-  {
-    title: '새로운 메세지',
-    description: '‘하드스틱’님께서 메세지를 보냈습니다.',
-    type: 'message',
-    time: '오후 12:22',
-  },
-  {
-    title: '새로운 메세지',
-    description: '‘하드스틱’님께서 메세지를 보냈습니다.',
-    type: 'message',
-    time: '오후 12:22',
-  },
-  {
-    title: '새로운 메세지',
-    description: '‘하드스틱’님께서 메세지를 보냈습니다.',
-    type: 'message',
-    time: '오후 12:22',
-  },
-  {
-    title: '새로운 메세지',
-    description: '‘하드스틱’님께서 메세지를 보냈습니다.',
-    type: 'message',
-    time: '오후 12:22',
-  },
-  {
-    title: '새로운 메세지',
-    description: '‘하드스틱’님께서 메세지를 보냈습니다.',
-    type: 'message',
-    time: '오후 12:22',
-  },
-  {
+    id: 3,
     title: '새로운 메세지',
     description: '‘하드스틱’님께서 메세지를 보냈습니다.',
     type: 'message',
@@ -74,11 +40,11 @@ const datas = [
 
 export const NotificationScreen: React.FC<Props> = () => {
   return (
-    <SafeAreaView>
+    <Container>
       <ScrollView>
         {datas.map((data) => (
           <>
-            <Card>
+            <Card key={data.id}>
               <CardHeaderContainer>
                 <LeftContainer>
                   <NotificationMessageIcon />
@@ -92,9 +58,12 @@ export const NotificationScreen: React.FC<Props> = () => {
           </>
         ))}
       </ScrollView>
-    </SafeAreaView>
+    </Container>
   );
 };
+const Container = styled.SafeAreaView`
+  flex: 1;
+`;
 
 const Card = styled.View`
   background-color: #ffffff;
@@ -131,7 +100,8 @@ const Description = styled.Text`
 `;
 
 const Line = styled.View`
-  width: 333.6px;
-  height: 0;
-  border: solid 1px #e5e5e8;
+  align-self: center;
+  width: 80%;
+  height: 1px;
+  background-color: #e5e5e8;
 `;
