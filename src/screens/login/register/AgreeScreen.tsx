@@ -36,7 +36,7 @@ export const AgreeScreen: React.FC = ({}) => {
             value={terms && privacy && location && marketing}
             setValue={handleCheckAll}
           />
-          <Content>캠퍼스 택시의 모든 운영원칙에 동의</Content>
+          <Content onPress={handleCheckAll}>캠퍼스 택시의 모든 운영원칙에 동의</Content>
         </CheckboxContainer>
         <CheckboxContainer>
           <SimpleCheckBox value={terms} setValue={setTerms} />

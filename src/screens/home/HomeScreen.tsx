@@ -4,7 +4,6 @@ import React from 'react';
 import { SchoolIcon } from '../../components/icon/home/SchoolIcon';
 import { BlankBackground } from '../../components/layout/BlankBackground';
 import { MainLogo } from '../../components/logo/MainLogo';
-import { useAuthContext } from '../../contexts/AuthContext';
 import { HomeStackParamList } from './HomeNavigation';
 
 type HomeScreenNavigationProp = StackNavigationProp<HomeStackParamList, 'HomeScreen'>;
@@ -13,7 +12,6 @@ type Props = {
   navigation: HomeScreenNavigationProp;
 };
 export const HomeScreen: React.FC<Props> = () => {
-  const { setLoggedOut } = useAuthContext();
   return (
     <BlankBackground color="#0d3664">
       <Container>
@@ -22,12 +20,6 @@ export const HomeScreen: React.FC<Props> = () => {
         </LogoContainer>
         <BannerContainer>
           <TempImage />
-          {/* <Text
-            onPress={() => {
-              setLoggedOut();
-            }}>
-            home
-          </Text> */}
         </BannerContainer>
         <MainContainer>
           <CardContainer>
