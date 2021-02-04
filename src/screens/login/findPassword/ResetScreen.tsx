@@ -1,5 +1,5 @@
 import styled from '@emotion/native';
-import { RouteProp, useNavigation } from '@react-navigation/native';
+import { useNavigation } from '@react-navigation/native';
 import { StackNavigationProp } from '@react-navigation/stack';
 import React, { useState } from 'react';
 import { SafeAreaView } from 'react-native-safe-area-context';
@@ -9,10 +9,8 @@ import { BlankBackground } from '../../../components/layout/BlankBackground';
 import { Description } from '../../../components/text/Description';
 import { Title } from '../../../components/text/Title';
 import { LoginStackParamList } from '../LoginNavigation';
-import { FindPasswordStackParamList } from './FindPasswordNaviagtion';
 
-type LoginNavigation = StackNavigationProp<LoginStackParamList, 'FindIdNavigation'>;
-type FindPasswordRoute = RouteProp<FindPasswordStackParamList, 'ResetScreen'>;
+type LoginNavigation = StackNavigationProp<LoginStackParamList, 'ResetScreen'>;
 
 export const ResetScreen: React.FC = ({}) => {
   const { navigate } = useNavigation<LoginNavigation>();

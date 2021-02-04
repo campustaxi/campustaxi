@@ -15,18 +15,15 @@ import { BlankBackground } from '../../../components/layout/BlankBackground';
 import { SimpleText } from '../../../components/text/SImpleText';
 import { Title } from '../../../components/text/Title';
 import { LoginStackParamList } from '../LoginNavigation';
-import { FindPasswordStackParamList } from './FindPasswordNaviagtion';
 
-type FindPasswordNavigation = StackNavigationProp<FindPasswordStackParamList, 'FindPasswordScreen'>;
-type LoginNavigation = StackNavigationProp<LoginStackParamList, 'FindPasswordNaviagtion'>;
+type LoginNavigation = StackNavigationProp<LoginStackParamList, 'FindPasswordScreen'>;
 
 enum FindMethod {
   PHONE = 'phone',
 }
 
 export const FindPasswordScreen: React.FC = ({}) => {
-  const { navigate } = useNavigation<FindPasswordNavigation>();
-  const { navigate: loginNavgate } = useNavigation<LoginNavigation>();
+  const { navigate } = useNavigation<LoginNavigation>();
   const [id, setId] = useState('');
   const [hasId, setHasId] = useState(false);
   const [method, setMethod] = useState<FindMethod>();
@@ -50,7 +47,7 @@ export const FindPasswordScreen: React.FC = ({}) => {
             <Description>아이디가 기억나지 않는다면?</Description>
             <IdText
               onPress={() => {
-                loginNavgate('FindIdNavigation');
+                navigate('FindIdScreen');
               }}>
               아이디 찾기
             </IdText>
@@ -68,7 +65,7 @@ export const FindPasswordScreen: React.FC = ({}) => {
     <BlankBackground>
       <SafeAreaView>
         <Container>
-          <Title centered>아이디 찾는 방법을 선택해 주세요.</Title>
+          <Title centered>비밀번호 찾는 방법을 선택해 주세요.</Title>
           <RadioContainer>
             <RadioForm formHorizontal={true} animation={true}>
               <RadioButton labelHorizontal={true}>

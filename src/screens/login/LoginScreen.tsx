@@ -52,6 +52,7 @@ export const LoginScreen: React.FC = ({}) => {
                   onChangeText={setId}
                   placeholder="아이디 입력"
                   placeholderTextColor="white"
+                  autoCapitalize="none"
                 />
                 <InputBorder />
                 <LoginInput
@@ -59,24 +60,24 @@ export const LoginScreen: React.FC = ({}) => {
                   onChangeText={setPassword}
                   placeholder="비밀번호 입력"
                   placeholderTextColor="white"
+                  secureTextEntry={true}
                 />
                 <InputBorder />
                 <FindContainer>
-                  <FindText onPress={() => navigate('FindIdNavigation')}>아이디 찾기</FindText>
+                  <FindText onPress={() => navigate('FindIdScreen')}>아이디 찾기</FindText>
                   <InputVerticalBorder />
-                  <FindText onPress={() => navigate('FindPasswordNaviagtion')}>
-                    비밀번호 찾기
-                  </FindText>
+                  <FindText onPress={() => navigate('FindPasswordScreen')}>비밀번호 찾기</FindText>
                 </FindContainer>
                 <ButtonContainer>
                   <BlankButton
+                    borderRadius={36}
                     onPress={() => setLoggedIn('hello')}
                     backgroundColor="rgb(237, 237, 237)">
                     로그인하기
                   </BlankButton>
                 </ButtonContainer>
                 <ButtonContainer>
-                  <BlankButton onPress={() => setLoggedIn('hello')} color="white">
+                  <BlankButton onPress={() => navigate('AgreeScreen')} color="white">
                     회원가입
                   </BlankButton>
                 </ButtonContainer>
@@ -95,6 +96,7 @@ export const LoginScreen: React.FC = ({}) => {
             <LoginContentContainer>
               <ButtonContainer>
                 <BlankButton
+                  borderRadius={36}
                   onPress={() => {
                     KakaoLogins.login([KAKAO_AUTH_TYPES.Talk]);
                   }}
@@ -106,6 +108,7 @@ export const LoginScreen: React.FC = ({}) => {
               {Platform.OS === 'ios' && (
                 <ButtonContainer>
                   <BlankButton
+                    borderRadius={36}
                     onPress={handleAppleLogin}
                     backgroundColor="white"
                     icon={<KakaoIcon />}>
@@ -144,6 +147,7 @@ const LoginContentContainer = styled.View`
 `;
 
 const LoginInput = styled.TextInput`
+  width: 100%;
   height: 20px;
   margin-bottom: 16px;
   color: white;

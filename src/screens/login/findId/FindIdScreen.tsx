@@ -1,36 +1,33 @@
-import styled, { css } from '@emotion/native';
+import styled from '@emotion/native';
 import { useNavigation } from '@react-navigation/native';
 import { StackNavigationProp } from '@react-navigation/stack';
 import React, { useState } from 'react';
 import { SafeAreaView } from 'react-native';
-import RNPickerSelect from 'react-native-picker-select';
 import RadioForm, {
   RadioButton,
   RadioButtonInput,
   RadioButtonLabel,
 } from 'react-native-simple-radio-button';
 import { SimpleButton } from '../../../components/button/SimpleButton';
+import { PhoneVerification } from '../../../components/form/PhoneVerification';
 import { TextField } from '../../../components/form/TextField';
 import { BlankBackground } from '../../../components/layout/BlankBackground';
 import { Description } from '../../../components/text/Description';
 import { Title } from '../../../components/text/Title';
-import { FindIdStackParamList } from './FindIdNaviagtion';
+import { LoginStackParamList } from '../LoginNavigation';
 
-type FindIdNavigation = StackNavigationProp<FindIdStackParamList, 'FindIdScreen'>;
+type LoginNavigation = StackNavigationProp<LoginStackParamList, 'FindIdScreen'>;
 
 enum FindMethod {
   PHONE = 'phone',
 }
 
 export const FindIdScreen: React.FC = ({}) => {
-  const { navigate } = useNavigation<FindIdNavigation>();
+  const { navigate } = useNavigation<LoginNavigation>();
   const [method, setMethod] = useState<FindMethod>();
   const [name, setName] = useState('');
-  const [phoneCountry, setPhoneCountry] = useState('');
-  const [phone, setPhone] = useState('');
   const [sent, setSent] = useState(false);
   const [code, setCode] = useState('');
-  console.log(phoneCountry, phone, code);
 
   return (
     <BlankBackground>
@@ -72,33 +69,11 @@ export const FindIdScreen: React.FC = ({}) => {
             {method === FindMethod.PHONE && (
               <>
                 <TextField value={name} setValue={setName} placeholder="이름(본명)" />
-                <PhoneContainer>
-                  <RNPickerSelect
-                    style={{
-                      inputAndroidContainer: PickerContainer,
-                      inputIOSContainer: PickerContainer,
-                      viewContainer: PickerViewContainer,
-                    }}
-                    onValueChange={(value) => setPhoneCountry(value)}
-                    items={[{ label: '+82', value: '+82' }]}
-                    value={phoneCountry}
-                    placeholder={{ label: '선택', value: '0' }}
-                  />
-                  <PhoneNumber
-                    value={phone}
-                    onChangeText={setPhone}
-                    placeholder="휴대폰 번호"
-                    placeholderTextColor="#b0b0b2"
-                    keyboardType="phone-pad"
-                  />
-                </PhoneContainer>
-                <SimpleButton
-                  onPress={() => {
+                <PhoneVerification
+                  onSend={() => {
                     setSent(true);
                   }}
-                  clicked={sent}>
-                  {sent ? '재전송하기' : '인증번호 전송하기'}
-                </SimpleButton>
+                />
                 {sent && (
                   <SentContainer>
                     <TextField
@@ -140,27 +115,6 @@ const RadioLine = styled.View`
 `;
 
 const RadioContainer = styled.View``;
-
-const PhoneContainer = styled.View`
-  flex-direction: row;
-  margin-bottom: 24px;
-`;
-
-const PhoneNumber = styled.TextInput`
-  flex: 3;
-  padding: 8px;
-  border: 2px solid rgba(149, 149, 149, 0.09);
-  border-radius: 8px;
-`;
-
-const PickerViewContainer = css`
-  flex: 1;
-`;
-const PickerContainer = css`
-  padding: 8px;
-  border-radius: 8px;
-  border: 2px solid rgba(149, 149, 149, 0.09);
-`;
 
 const SentContainer = styled.View`
   margin-top: 24px;

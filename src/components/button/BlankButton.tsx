@@ -6,6 +6,8 @@ type Props = {
   icon?: ReactNode;
   color?: string;
   backgroundColor?: string;
+  borderRadius?: number;
+  paddingBottom?: number;
 };
 
 export const BlankButton: React.FC<Props> = ({
@@ -14,9 +16,15 @@ export const BlankButton: React.FC<Props> = ({
   icon,
   color,
   backgroundColor,
+  borderRadius,
+  paddingBottom,
 }) => {
   return (
-    <Box onPress={onPress} backgroundColor={backgroundColor}>
+    <Box
+      onPress={onPress}
+      backgroundColor={backgroundColor}
+      borderRadius={borderRadius}
+      paddingBottom={paddingBottom}>
       <Container>
         {icon && <IconConatiner>{icon}</IconConatiner>}
         <ChildrenText color={color}>{children}</ChildrenText>
@@ -25,11 +33,18 @@ export const BlankButton: React.FC<Props> = ({
   );
 };
 
-const Box = styled.TouchableOpacity<{ backgroundColor?: string }>`
+type BoxProps = {
+  backgroundColor?: string;
+  borderRadius?: number;
+  paddingBottom?: number;
+};
+
+const Box = styled.TouchableOpacity<BoxProps>`
   background-color: ${({ backgroundColor }) => backgroundColor};
   align-items: center;
-  border-radius: 36px;
+  border-radius: ${({ borderRadius }) => borderRadius && `${borderRadius}px`};
   justify-content: center;
+  padding-bottom: ${({ paddingBottom }) => paddingBottom && `${paddingBottom}px`};
 `;
 
 const Container = styled.View`

@@ -6,14 +6,13 @@ import { SafeAreaView } from 'react-native-safe-area-context';
 import { SimpleButton } from '../../../components/button/SimpleButton';
 import { BlankBackground } from '../../../components/layout/BlankBackground';
 import { LoginStackParamList } from '../LoginNavigation';
-import { FindIdStackParamList } from './FindIdNaviagtion';
 
-type LoginNavigation = StackNavigationProp<LoginStackParamList, 'FindIdNavigation'>;
-type FindIdRoute = RouteProp<FindIdStackParamList, 'FoundScreen'>;
+type LoginNavigation = StackNavigationProp<LoginStackParamList, 'FoundScreen'>;
+type LoginRoute = RouteProp<LoginStackParamList, 'FoundScreen'>;
 
 export const FoundScreen: React.FC = ({}) => {
   const { navigate } = useNavigation<LoginNavigation>();
-  const { params } = useRoute<FindIdRoute>();
+  const { params } = useRoute<LoginRoute>();
 
   return (
     <BlankBackground>
@@ -32,7 +31,12 @@ export const FoundScreen: React.FC = ({}) => {
               </SimpleButton>
             </ButtonWrapper>
             <ButtonWrapper>
-              <SimpleButton onPress={() => {}}>비밀번호 찾기</SimpleButton>
+              <SimpleButton
+                onPress={() => {
+                  navigate('FindPasswordScreen');
+                }}>
+                비밀번호 찾기
+              </SimpleButton>
             </ButtonWrapper>
           </ButtonContainer>
         </Container>

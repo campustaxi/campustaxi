@@ -15,7 +15,8 @@ export const SimpleButton: React.FC<Props> = ({ children, onPress, icon, clicked
       backgroundColor={clicked ? '#CBCED7' : '#172864'}
       color="white"
       icon={icon}
-      onPress={onPress}>
+      onPress={onPress}
+      borderRadius={36}>
       {children}
     </BlankButton>
   );
