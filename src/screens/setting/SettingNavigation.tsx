@@ -9,8 +9,12 @@ const SettingStack = createStackNavigator<SettingStackParamList>();
 
 export const SettingNavigation = () => {
   return (
-    <SettingStack.Navigator initialRouteName="SettingScreen" headerMode="none">
-      <SettingStack.Screen name="SettingScreen" component={SettingScreen} />
+    <SettingStack.Navigator initialRouteName="SettingScreen">
+      <SettingStack.Screen
+        name="SettingScreen"
+        component={SettingScreen}
+        options={{ title: '설정' }}
+      />
     </SettingStack.Navigator>
   );
 };

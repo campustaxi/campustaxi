@@ -9,8 +9,12 @@ const MessageStack = createStackNavigator<MessageStackParamList>();
 
 export const MessageNavigation = () => {
   return (
-    <MessageStack.Navigator initialRouteName="MessageScreen" headerMode="none">
-      <MessageStack.Screen name="MessageScreen" component={MessageScreen} />
+    <MessageStack.Navigator initialRouteName="MessageScreen">
+      <MessageStack.Screen
+        name="MessageScreen"
+        component={MessageScreen}
+        options={{ title: '내 채팅방 목록' }}
+      />
     </MessageStack.Navigator>
   );
 };

@@ -9,8 +9,12 @@ const NotificationStack = createStackNavigator<NotificationStackParamList>();
 
 export const NotificationNavigation = () => {
   return (
-    <NotificationStack.Navigator initialRouteName="NotificationScreen" headerMode="none">
-      <NotificationStack.Screen name="NotificationScreen" component={NotificationScreen} />
+    <NotificationStack.Navigator initialRouteName="NotificationScreen">
+      <NotificationStack.Screen
+        name="NotificationScreen"
+        component={NotificationScreen}
+        options={{ title: '알림' }}
+      />
     </NotificationStack.Navigator>
   );
 };
