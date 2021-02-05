@@ -9,7 +9,9 @@ const SettingStack = createStackNavigator<SettingStackParamList>();
 
 export const SettingNavigation = () => {
   return (
-    <SettingStack.Navigator initialRouteName="SettingScreen">
+    <SettingStack.Navigator
+      initialRouteName="SettingScreen"
+      screenOptions={{ headerTitleStyle: { alignSelf: 'center' } }}>
       <SettingStack.Screen
         name="SettingScreen"
         component={SettingScreen}

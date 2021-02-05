@@ -1,6 +1,7 @@
 import styled from '@emotion/native';
 import { StackNavigationProp } from '@react-navigation/stack';
 import React from 'react';
+import { Platform } from 'react-native';
 import { SchoolIcon } from '../../components/icon/home/SchoolIcon';
 import { BlankBackground } from '../../components/layout/BlankBackground';
 import { MainLogo } from '../../components/logo/MainLogo';
@@ -71,6 +72,7 @@ export const HomeScreen: React.FC<Props> = () => {
 };
 const Container = styled.SafeAreaView`
   flex: 1;
+  padding-top: ${Platform.OS === 'android' && '45px'};
 `;
 
 const LogoContainer = styled.View`

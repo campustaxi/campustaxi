@@ -1,5 +1,6 @@
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import React from 'react';
+import { Platform } from 'react-native';
 import { HomeIcon } from '../../components/tab-icon/HomeIcon';
 import { MessageIcon } from '../../components/tab-icon/MessageIcon';
 import { NotificationIcon } from '../../components/tab-icon/NotificationIcon';
@@ -25,6 +26,7 @@ export const HomeTabNavigation = () => {
       tabBarOptions={{
         iconStyle: {
           marginTop: 16,
+          marginBottom: Platform.OS === 'android' ? 8 : undefined,
         },
       }}>
       <HomeTab.Screen

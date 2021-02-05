@@ -43,8 +43,8 @@ export const NotificationScreen: React.FC<Props> = () => {
     <Container>
       <ScrollView>
         {datas.map((data) => (
-          <>
-            <Card key={data.id}>
+          <DataContainer key={data.id}>
+            <Card>
               <CardHeaderContainer>
                 <LeftContainer>
                   <NotificationMessageIcon />
@@ -55,7 +55,7 @@ export const NotificationScreen: React.FC<Props> = () => {
               <Description>{data.description}</Description>
             </Card>
             <Line />
-          </>
+          </DataContainer>
         ))}
       </ScrollView>
     </Container>
@@ -64,6 +64,8 @@ export const NotificationScreen: React.FC<Props> = () => {
 const Container = styled.SafeAreaView`
   flex: 1;
 `;
+
+const DataContainer = styled.View``;
 
 const Card = styled.View`
   background-color: #ffffff;

@@ -9,7 +9,9 @@ const MessageStack = createStackNavigator<MessageStackParamList>();
 
 export const MessageNavigation = () => {
   return (
-    <MessageStack.Navigator initialRouteName="MessageScreen">
+    <MessageStack.Navigator
+      initialRouteName="MessageScreen"
+      screenOptions={{ headerTitleStyle: { alignSelf: 'center' } }}>
       <MessageStack.Screen
         name="MessageScreen"
         component={MessageScreen}

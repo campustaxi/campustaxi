@@ -9,7 +9,11 @@ const NotificationStack = createStackNavigator<NotificationStackParamList>();
 
 export const NotificationNavigation = () => {
   return (
-    <NotificationStack.Navigator initialRouteName="NotificationScreen">
+    <NotificationStack.Navigator
+      initialRouteName="NotificationScreen"
+      screenOptions={{
+        headerTitleStyle: { alignSelf: 'center' },
+      }}>
       <NotificationStack.Screen
         name="NotificationScreen"
         component={NotificationScreen}

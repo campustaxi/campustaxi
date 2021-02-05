@@ -29,7 +29,7 @@ export const MessageScreen: React.FC<Props> = () => {
     <Container>
       <ScrollView>
         {datas.map((data) => (
-          <>
+          <DataContainer key={data.id}>
             <Card>
               <TempCircle>
                 <CircleText>NO.{data.id}</CircleText>
@@ -59,7 +59,7 @@ export const MessageScreen: React.FC<Props> = () => {
               </CardContainer>
             </Card>
             <Line />
-          </>
+          </DataContainer>
         ))}
       </ScrollView>
     </Container>
@@ -68,6 +68,9 @@ export const MessageScreen: React.FC<Props> = () => {
 const Container = styled.SafeAreaView`
   flex: 1;
 `;
+
+const DataContainer = styled.View``;
+
 const Card = styled.View`
   flex-direction: row;
   background-color: #ffffff;
