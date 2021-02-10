@@ -1,7 +1,11 @@
 import styled from '@emotion/native';
 import { StackNavigationProp } from '@react-navigation/stack';
-import React from 'react';
+import axios from 'axios';
+import { format } from 'date-fns';
+import React, { useEffect, useState } from 'react';
 import { ScrollView, Text } from 'react-native';
+import { API_URL } from '../../constant';
+import { useAuthContext } from '../../contexts/AuthContext';
 import { MessageStackParamList } from './MessageNavigation';
 
 type MessageScreenNavigationProp = StackNavigationProp<MessageStackParamList, 'MessageScreen'>;
@@ -9,22 +13,60 @@ type MessageScreenNavigationProp = StackNavigationProp<MessageStackParamList, 'M
 type Props = {
   navigation: MessageScreenNavigationProp;
 };
+const Gender = ['여자', '남자'];
+type APIData = {
+  meeting_dtm: Date;
+  gender: number;
+  person_maximum: number;
+  person_current: number;
+  room_type: string;
+  owner: boolean;
+  member: number[];
+};
 
-const datas = [
-  {
-    id: 1,
-    gender: '남자',
-    title: '여자천하',
-    currentCount: 3,
-    maxCount: 4,
-    time: '12:22',
-    startLocation: '출발지 - 경기도 용인시 (14:00 탑승)',
-    arriveLocation: '도착지 - 경기도 수원시 권선구',
-    unreadMessage: '300+',
-  },
-];
+type Data = {
+  id: number;
+  gender: string;
+  title: string;
+  currentCount: number;
+  maxCount: number;
+  time: string;
+  startLocation: string;
+  arriveLocation: string;
+  unreadMessage: string;
+};
 
 export const MessageScreen: React.FC<Props> = () => {
+  const [datas, setDatas] = useState<Data[]>();
+  const { token } = useAuthContext();
+
+  useEffect(() => {
+    axios
+      .get<APIData[]>(`${API_URL}/api/v1/rooms/`, {
+        headers: {
+          Authorization: `Token ${token}`,
+        },
+      })
+      .then((response) => {
+        const data = response.data.map((item) => ({
+          id: 1,
+          gender: Gender[item.gender] ?? '남 여',
+          title: 'title',
+          currentCount: item.person_current,
+          maxCount: item.person_maximum,
+          time: format(new Date(item.meeting_dtm), 'HH:MM'),
+          startLocation: '1',
+          arriveLocation: '2',
+          unreadMessage: '300+',
+        }));
+        setDatas(data);
+      });
+  }, [token]);
+
+  if (!datas || datas.length <= 0) {
+    return <></>;
+  }
+
   return (
     <Container>
       <ScrollView>

@@ -3,6 +3,7 @@ import appleAuth from '@invertase/react-native-apple-authentication';
 import KakaoLogins, { KAKAO_AUTH_TYPES } from '@react-native-seoul/kakao-login';
 import { useNavigation } from '@react-navigation/native';
 import { StackNavigationProp } from '@react-navigation/stack';
+import axios from 'axios';
 import React, { useState } from 'react';
 import { Platform, SafeAreaView } from 'react-native';
 import image from '../../../images/login/bg.png';
@@ -10,6 +11,7 @@ import { BlankButton } from '../../components/button/BlankButton';
 import { KakaoIcon } from '../../components/icon/KakaoIcon';
 import { BlankBackground } from '../../components/layout/BlankBackground';
 import { Logo } from '../../components/logo/Logo';
+import { API_URL } from '../../constant';
 import { useAuthContext } from '../../contexts/AuthContext';
 import { LoginStackParamList } from './LoginNavigation';
 
@@ -21,6 +23,18 @@ export const LoginScreen: React.FC = ({}) => {
   const [id, setId] = useState('');
   const [password, setPassword] = useState('');
   const { setLoggedIn } = useAuthContext();
+
+  const login = async () => {
+    const { data } = await axios.post<{ token: string }>(`${API_URL}/auth/login/`, {
+      username: id,
+      password: password,
+    });
+    console.log(data);
+    if (data.token) {
+      setLoggedIn(data.token);
+    }
+  };
+
   const handleAppleLogin = async () => {
     // performs login request
     const appleAuthRequestResponse = await appleAuth.performRequest({
@@ -71,7 +85,7 @@ export const LoginScreen: React.FC = ({}) => {
                 <ButtonContainer>
                   <BlankButton
                     borderRadius={36}
-                    onPress={() => setLoggedIn('hello')}
+                    onPress={() => login()}
                     backgroundColor="rgb(237, 237, 237)">
                     로그인하기
                   </BlankButton>
