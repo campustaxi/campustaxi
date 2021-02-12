@@ -1387,10 +1387,17 @@
     "@types/react" "*"
     "@types/react-native" "*"
 
-"@types/react-native@*", "@types/react-native@^0.63.2":
+"@types/react-native@*":
   version "0.63.46"
   resolved "https://registry.yarnpkg.com/@types/react-native/-/react-native-0.63.46.tgz#942df5af29046c6f22227495e00d5297cc1cea73"
   integrity sha512-SnBnWRErpISIaWk4K8kAfIKqSPdZ8fdH6HIw7kVdz6jMl/5FAf6iXeIwRfVZg1bCMh+ymNPCpSENNNEVprxj/w==
+  dependencies:
+    "@types/react" "*"
+
+"@types/react-native@^0.63.49":
+  version "0.63.49"
+  resolved "https://registry.yarnpkg.com/@types/react-native/-/react-native-0.63.49.tgz#b9a4781a0543763f0079c3ef2ba2148a4509b32e"
+  integrity sha512-ivTn2n9xsmlwSO1GygkwEMjkrSDqPAJVhbhsl3EffGtG6zWPaJ+AJVImPoBZN1VY8GItGPPlLGEb0i6LGb83VA==
   dependencies:
     "@types/react" "*"
 
@@ -5981,7 +5988,7 @@ react-native-svg@^12.1.0:
     css-select "^2.1.0"
     css-tree "^1.0.0-alpha.39"
 
-react-native@0.63.4:
+react-native@^0.63.4:
   version "0.63.4"
   resolved "https://registry.yarnpkg.com/react-native/-/react-native-0.63.4.tgz#2210fdd404c94a5fa6b423c6de86f8e48810ec36"
   integrity sha512-I4kM8kYO2mWEYUFITMcpRulcy4/jd+j9T6PbIzR0FuMcz/xwd+JwHoLPa1HmCesvR1RDOw9o4D+OFLwuXXfmGw==

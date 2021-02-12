@@ -19,7 +19,11 @@ export const MessageNavigation = () => {
         component={MessageScreen}
         options={{ title: '내 채팅방 목록' }}
       />
-      <MessageStack.Screen name="ChatRoomScreen" component={ChatRoomScreen} />
+      <MessageStack.Screen
+        name="ChatRoomScreen"
+        component={ChatRoomScreen}
+        options={{ headerTransparent: true }}
+      />
     </MessageStack.Navigator>
   );
 };
