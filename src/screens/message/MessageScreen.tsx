@@ -1,4 +1,5 @@
 import styled from '@emotion/native';
+import { useNavigation } from '@react-navigation/native';
 import { StackNavigationProp } from '@react-navigation/stack';
 import axios from 'axios';
 import { format } from 'date-fns';
@@ -8,11 +9,8 @@ import { API_URL } from '../../constant';
 import { useAuthContext } from '../../contexts/AuthContext';
 import { MessageStackParamList } from './MessageNavigation';
 
-type MessageScreenNavigationProp = StackNavigationProp<MessageStackParamList, 'MessageScreen'>;
+type MessageNavigation = StackNavigationProp<MessageStackParamList, 'MessageScreen'>;
 
-type Props = {
-  navigation: MessageScreenNavigationProp;
-};
 const Gender = ['여자', '남자'];
 type APIData = {
   meeting_dtm: Date;
@@ -36,9 +34,10 @@ type Data = {
   unreadMessage: string;
 };
 
-export const MessageScreen: React.FC<Props> = () => {
+export const MessageScreen: React.FC = () => {
   const [datas, setDatas] = useState<Data[]>();
   const { token } = useAuthContext();
+  const navigation = useNavigation<MessageNavigation>();
 
   useEffect(() => {
     axios
@@ -71,7 +70,11 @@ export const MessageScreen: React.FC<Props> = () => {
     <Container>
       <ScrollView>
         {datas.map((data) => (
-          <DataContainer key={data.id}>
+          <DataContainer
+            key={data.id}
+            onPress={() => {
+              navigation.navigate('ChatRoomScreen');
+            }}>
             <Card>
               <TempCircle>
                 <CircleText>NO.{data.id}</CircleText>
@@ -111,7 +114,7 @@ const Container = styled.SafeAreaView`
   flex: 1;
 `;
 
-const DataContainer = styled.View``;
+const DataContainer = styled.TouchableOpacity``;
 
 const Card = styled.View`
   flex-direction: row;

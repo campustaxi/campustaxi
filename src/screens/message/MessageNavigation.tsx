@@ -1,9 +1,11 @@
 import { createStackNavigator } from '@react-navigation/stack';
 import React from 'react';
+import { ChatRoomScreen } from './ChatRoomScreen';
 import { MessageScreen } from './MessageScreen';
 
 export type MessageStackParamList = {
   MessageScreen: undefined;
+  ChatRoomScreen: undefined;
 };
 const MessageStack = createStackNavigator<MessageStackParamList>();
 
@@ -17,6 +19,7 @@ export const MessageNavigation = () => {
         component={MessageScreen}
         options={{ title: '내 채팅방 목록' }}
       />
+      <MessageStack.Screen name="ChatRoomScreen" component={ChatRoomScreen} />
     </MessageStack.Navigator>
   );
 };
