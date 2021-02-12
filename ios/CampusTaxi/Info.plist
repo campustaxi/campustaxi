@@ -23,21 +23,23 @@
 	<key>CFBundleURLTypes</key>
 	<array>
 		<dict>
+			<key>CFBundleIdentifier</key>
+			<string></string>
 			<key>CFBundleTypeRole</key>
 			<string>Editor</string>
 			<key>CFBundleURLSchemes</key>
 			<array>
-				<string>kakao0e8db7b8038b44dc4db29d8902cff2c3</string>
+				<string>kakao2d496920342c7d6632f422d9aa6ba858</string>
 			</array>
 		</dict>
 	</array>
 	<key>CFBundleVersion</key>
 	<string>1</string>
 	<key>KAKAO_APP_KEY</key>
-	<string>0e8db7b8038b44dc4db29d8902cff2c3</string>
+	<string>2d496920342c7d6632f422d9aa6ba858</string>
 	<key>LSApplicationQueriesSchemes</key>
 	<array>
-		<string>kakao0e8db7b8038b44dc4db29d8902cff2c3</string>
+		<string>kakao2d496920342c7d6632f422d9aa6ba858</string>
 		<string>kakaokompassauth</string>
 		<string>storykompassauth</string>
 		<string>kakaolink</string>
@@ -76,5 +78,7 @@
 	</array>
 	<key>UIViewControllerBasedStatusBarAppearance</key>
 	<false/>
+	<key>NMFClientId</key>
+    <string>lxll2d6397</string>
 </dict>
 </plist>

@@ -5,7 +5,7 @@ import { MessageScreen } from './MessageScreen';
 
 export type MessageStackParamList = {
   MessageScreen: undefined;
-  ChatRoomScreen: undefined;
+  ChatRoomScreen: { id: number };
 };
 const MessageStack = createStackNavigator<MessageStackParamList>();
 
