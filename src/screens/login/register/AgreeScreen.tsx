@@ -32,27 +32,61 @@ export const AgreeScreen: React.FC = ({}) => {
     <Container>
       <ContentContainer>
         <CheckboxContainer>
-          <SimpleCheckBox
-            value={terms && privacy && location && marketing}
-            setValue={handleCheckAll}
-          />
-          <Content onPress={handleCheckAll}>캠퍼스 택시의 모든 운영원칙에 동의</Content>
+          <Checkbox>
+            <SimpleCheckBox
+              value={terms && privacy && location && marketing}
+              setValue={handleCheckAll}
+            />
+            <Content onPress={handleCheckAll}>캠퍼스 택시의 모든 운영원칙에 동의</Content>
+          </Checkbox>
         </CheckboxContainer>
         <CheckboxContainer>
-          <SimpleCheckBox value={terms} setValue={setTerms} />
-          <Content>서비스 이용약관 (필수)</Content>
+          <Checkbox>
+            <SimpleCheckBox value={terms} setValue={setTerms} />
+            <Content>서비스 이용약관 (필수)</Content>
+          </Checkbox>
+          <Description
+            onPress={() => {
+              navigate('TermsScreen');
+            }}>
+            자세히보기
+          </Description>
         </CheckboxContainer>
         <CheckboxContainer>
-          <SimpleCheckBox value={privacy} setValue={setPrivacy} />
-          <Content>개인정보 처리방침 (필수)</Content>
+          <Checkbox>
+            <SimpleCheckBox value={privacy} setValue={setPrivacy} />
+            <Content>개인정보 처리방침 (필수)</Content>
+          </Checkbox>
+          <Description
+            onPress={() => {
+              navigate('PrivacyScreen');
+            }}>
+            자세히보기
+          </Description>
         </CheckboxContainer>
         <CheckboxContainer>
-          <SimpleCheckBox value={location} setValue={setLocation} />
-          <Content>위치정보 이용약관 (필수)</Content>
+          <Checkbox>
+            <SimpleCheckBox value={location} setValue={setLocation} />
+            <Content>위치정보 이용약관 (필수)</Content>
+          </Checkbox>
+          <Description
+            onPress={() => {
+              navigate('GeoScreen');
+            }}>
+            자세히보기
+          </Description>
         </CheckboxContainer>
         <CheckboxContainer>
-          <SimpleCheckBox value={marketing} setValue={setMarketing} />
-          <Content>마케팅 정보 수신 (선택)</Content>
+          <Checkbox>
+            <SimpleCheckBox value={marketing} setValue={setMarketing} />
+            <Content>마케팅 정보 수신 (선택)</Content>
+          </Checkbox>
+          <Description
+            onPress={() => {
+              navigate('MarketingScreen');
+            }}>
+            자세히보기
+          </Description>
         </CheckboxContainer>
         <Note>※ 선택 약관에 동의하지 않아도 회원가입이 가능합니다.</Note>
       </ContentContainer>
@@ -82,10 +116,21 @@ const CheckboxContainer = styled.View`
   flex-direction: row;
   margin-bottom: 16px;
   align-items: center;
+  justify-content: space-between;
 `;
 
 const Content = styled.Text`
   margin-left: 8px;
+`;
+
+const Checkbox = styled.View`
+  flex-direction: row;
+`;
+
+const Description = styled.Text`
+  color: #8b8b8b;
+  border-bottom-width: 1px;
+  border-bottom-color: #8b8b8b;
 `;
 
 const Note = styled.Text`

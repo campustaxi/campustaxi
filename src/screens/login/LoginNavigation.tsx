@@ -1,6 +1,10 @@
 import { createStackNavigator } from '@react-navigation/stack';
 import React from 'react';
 import { BackIcon } from '../../components/icon/BackIcon';
+import { GeoScreen } from './document/GeoScreen';
+import { MarketingScreen } from './document/MarketingScreen';
+import { PrivacyScreen } from './document/PrivacyScreen';
+import { TermsScreen } from './document/TermsScreen';
 import { FindIdScreen } from './findId/FindIdScreen';
 import { FoundScreen } from './findId/FoundScreen';
 import { FindPasswordScreen } from './findPassword/FindPasswordScreen';
@@ -17,6 +21,10 @@ export type LoginStackParamList = {
   ResetScreen: undefined;
   FindIdScreen: undefined;
   FoundScreen: { id: string };
+  GeoScreen: undefined;
+  MarketingScreen: undefined;
+  PrivacyScreen: undefined;
+  TermsScreen: undefined;
 };
 const LoginStack = createStackNavigator<LoginStackParamList>();
 
@@ -61,6 +69,26 @@ export const LoginNavigation = () => {
         name="FoundScreen"
         component={FoundScreen}
         options={{ title: '아이디 찾기 결과' }}
+      />
+      <LoginStack.Screen
+        name="GeoScreen"
+        component={GeoScreen}
+        options={{ title: '위치정보 이용약관' }}
+      />
+      <LoginStack.Screen
+        name="MarketingScreen"
+        component={MarketingScreen}
+        options={{ title: '마케팅 정보 수신' }}
+      />
+      <LoginStack.Screen
+        name="PrivacyScreen"
+        component={PrivacyScreen}
+        options={{ title: '개인정보처리방침' }}
+      />
+      <LoginStack.Screen
+        name="TermsScreen"
+        component={TermsScreen}
+        options={{ title: '서비스 이용약관' }}
       />
     </LoginStack.Navigator>
   );
