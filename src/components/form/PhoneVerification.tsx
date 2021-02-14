@@ -34,8 +34,10 @@ export const PhoneVerification: React.FC<Props> = ({ onSend }) => {
       </PhoneContainer>
       <SimpleButton
         onPress={() => {
-          setSent(true);
-          onSend();
+          if (phone && phoneCountry) {
+            setSent(true);
+            onSend();
+          }
         }}
         clicked={sent}>
         {sent ? '재전송하기' : '인증번호 전송하기'}

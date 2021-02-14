@@ -12,6 +12,7 @@ import { ResetScreen } from './findPassword/ResetScreen';
 import { LoginScreen } from './LoginScreen';
 import { AgreeScreen } from './register/AgreeScreen';
 import { RegisterScreen } from './register/RegisterScreen';
+import { RegisterSuccessScreen } from './register/RegisterSuccessScreen';
 
 export type LoginStackParamList = {
   LoginScreen: undefined;
@@ -25,6 +26,7 @@ export type LoginStackParamList = {
   MarketingScreen: undefined;
   PrivacyScreen: undefined;
   TermsScreen: undefined;
+  RegisterSuccessScreen: undefined;
 };
 const LoginStack = createStackNavigator<LoginStackParamList>();
 
@@ -89,6 +91,11 @@ export const LoginNavigation = () => {
         name="TermsScreen"
         component={TermsScreen}
         options={{ title: '서비스 이용약관' }}
+      />
+      <LoginStack.Screen
+        name="RegisterSuccessScreen"
+        component={RegisterSuccessScreen}
+        options={{ title: '회원 가입 완료' }}
       />
     </LoginStack.Navigator>
   );

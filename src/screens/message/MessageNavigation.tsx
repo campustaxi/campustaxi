@@ -1,5 +1,6 @@
 import { createStackNavigator } from '@react-navigation/stack';
 import React from 'react';
+import { BackIcon } from '../../components/icon/BackIcon';
 import { ChatRoomScreen } from './ChatRoomScreen';
 import { MessageScreen } from './MessageScreen';
 
@@ -13,7 +14,10 @@ export const MessageNavigation = () => {
   return (
     <MessageStack.Navigator
       initialRouteName="MessageScreen"
-      screenOptions={{ headerTitleStyle: { alignSelf: 'center' } }}>
+      screenOptions={{
+        headerTitleStyle: { alignSelf: 'center' },
+        headerLeft: ({ onPress }) => <BackIcon onPress={onPress} />,
+      }}>
       <MessageStack.Screen
         name="MessageScreen"
         component={MessageScreen}

@@ -1,5 +1,6 @@
 import { createStackNavigator } from '@react-navigation/stack';
 import React from 'react';
+import { BackIcon } from '../../components/icon/BackIcon';
 import { NotificationScreen } from './NotificationScreen';
 
 export type NotificationStackParamList = {
@@ -13,6 +14,7 @@ export const NotificationNavigation = () => {
       initialRouteName="NotificationScreen"
       screenOptions={{
         headerTitleStyle: { alignSelf: 'center' },
+        headerLeft: ({ onPress }) => <BackIcon onPress={onPress} />,
       }}>
       <NotificationStack.Screen
         name="NotificationScreen"
