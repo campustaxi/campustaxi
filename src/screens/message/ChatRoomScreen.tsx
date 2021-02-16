@@ -2,8 +2,8 @@ import styled from '@emotion/native';
 import { RouteProp, useRoute } from '@react-navigation/native';
 import axios from 'axios';
 import { differenceInMilliseconds } from 'date-fns';
-import React, { useEffect, useState } from 'react';
-import { Platform, StatusBar } from 'react-native';
+import React, { useEffect, useRef, useState } from 'react';
+import { Platform, ScrollView, StatusBar } from 'react-native';
 import { Chat } from '../../components/chat/Chat';
 import { BlankBackground } from '../../components/layout/BlankBackground';
 import { API_URL } from '../../constant';
@@ -23,9 +23,12 @@ export type Message = {
 
 export const ChatRoomScreen: React.FC = () => {
   const [datas, setDatas] = useState<Message[]>();
+  const [message, setMessage] = useState('');
   const { token } = useAuthContext();
   const route = useRoute<NavigationRoute>();
   const id = route.params.id;
+  const [refetch, setRefetch] = useState<Date>();
+  const scrollView = useRef<ScrollView>(null);
 
   useEffect(() => {
     if (Platform.OS === 'android') {
@@ -49,7 +52,33 @@ export const ChatRoomScreen: React.FC = () => {
           setDatas(data);
         });
     }
-  }, [id, token]);
+  }, [id, token, refetch]);
+
+  useEffect(() => {
+    if (datas && scrollView.current) {
+      setTimeout(() => {
+        scrollView.current?.scrollToEnd({ animated: true });
+      }, 500);
+    }
+  }, [scrollView, datas]);
+
+  const sendMessage = (text: string) => {
+    if (token) {
+      axios
+        .post(
+          `${API_URL}/api/v1/messages/`,
+          { message: text, message_type: 'Message', writer: 1, room: id },
+          {
+            headers: {
+              Authorization: `Token ${token}`,
+            },
+          },
+        )
+        .then(() => {
+          setRefetch(new Date());
+        });
+    }
+  };
 
   if (!datas || datas.length <= 0) {
     return <></>;
@@ -61,17 +90,24 @@ export const ChatRoomScreen: React.FC = () => {
         <Container>
           <BlankBackground color="#fff">
             <TitleContainer />
-            <ContentContainer>
+            <ContentContainer
+              ref={scrollView}
+              onLayout={() => {
+                scrollView.current?.scrollToEnd({ animated: true });
+              }}>
               {datas.map((data, index) => (
                 <Chat key={data.created_at.toString()} data={data} index={index} datas={datas} />
               ))}
             </ContentContainer>
             <TextAreaContainer>
               <TextArea
+                value={message}
                 autoCapitalize="none"
                 returnKeyType="send"
+                onChangeText={setMessage}
                 onSubmitEditing={(e) => {
-                  console.log(e.nativeEvent.text);
+                  setMessage('');
+                  sendMessage(e.nativeEvent.text);
                 }}
               />
             </TextAreaContainer>
