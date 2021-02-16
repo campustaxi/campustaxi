@@ -120,7 +120,7 @@ export const ChatRoomScreen: React.FC = () => {
 
 const Container = styled.SafeAreaView`
   justify-content: space-around;
-  padding: 24px;
+  padding-top: 24px;
   flex: 1;
 `;
 

@@ -4,7 +4,7 @@ import Svg, { G, Path } from 'react-native-svg';
 type Props = SVGProps<SVGElement>;
 export const PencilIcon: React.FC<Props> = ({ width, height }) => {
   return (
-    <Svg width={width ?? 48} height={height ?? 48} viewBox="0 0 36.186 36.213">
+    <Svg width={width ?? 36} height={height ?? 36} viewBox="0 0 36.186 36.213">
       <G transform="translate(-284.928 -277.237)">
         <G>
           <Path

@@ -34,7 +34,7 @@ export const HomeScreen: React.FC<Props> = () => {
           <CardContainer>
             <Card>
               <SchoolIcon />
-              <CardTitle>둥교</CardTitle>
+              <CardTitle>등교</CardTitle>
             </Card>
             <Card>
               <BusIcon />
@@ -111,6 +111,7 @@ const CardContainer = styled.View`
 `;
 
 const Card = styled.TouchableOpacity`
+  ${Platform.OS === 'android' && 'elevation: 6;'}
   flex: 1;
   background-color: #ffffff;
   justify-content: center;

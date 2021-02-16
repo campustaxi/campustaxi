@@ -158,10 +158,7 @@ const LoginContentContainer = styled.View`
 `;
 
 const LoginInput = styled.TextInput`
-  width: 100%;
-  min-width: 100px;
-  height: 20px;
-  margin-bottom: 16px;
+  padding-bottom: 16px;
   color: white;
   font-size: 18px;
   text-align: center;

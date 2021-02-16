@@ -4,7 +4,7 @@ import Svg, { G, Path, Rect } from 'react-native-svg';
 type Props = SVGProps<SVGElement>;
 export const SchoolIcon: React.FC<Props> = ({ width, height }) => {
   return (
-    <Svg width={width ?? 48} height={height ?? 48} viewBox="0 0 36.186 37.375">
+    <Svg width={width ?? 36} height={height ?? 37} viewBox="0 0 36.186 37.375">
       <G transform="translate(-49.886 -276.332)">
         <G transform="translate(65 305)" fill="#ff9515" stroke="#ff9515" stroke-width="1">
           <Rect width="6" height="8" stroke="none" />

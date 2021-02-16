@@ -4,7 +4,7 @@ import Svg, { Circle, G, Path } from 'react-native-svg';
 type Props = SVGProps<SVGElement>;
 export const GameIcon: React.FC<Props> = ({ width, height }) => {
   return (
-    <Svg width={width ?? 48} height={height ?? 48} viewBox="0 0 43.591 23.072">
+    <Svg width={width ?? 43} height={height ?? 23} viewBox="0 0 43.591 23.072">
       <G id="그룹_174" data-name="그룹 174" transform="translate(-163.771 -391.76)">
         <G
           id="타원_8"

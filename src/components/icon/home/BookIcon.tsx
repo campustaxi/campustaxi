@@ -4,7 +4,7 @@ import Svg, { G, Path } from 'react-native-svg';
 type Props = SVGProps<SVGElement>;
 export const BookIcon: React.FC<Props> = ({ width, height }) => {
   return (
-    <Svg width={width ?? 48} height={height ?? 48} viewBox="0 0 36.186 41.299">
+    <Svg width={width ?? 36} height={height ?? 41} viewBox="0 0 36.186 41.299">
       <G transform="translate(-50.576 -385.696)">
         <Path
           d="M66.886,373.908h5.308l2.089,2.1v2.713l-2.352,1.263H66.886l-2.527-1.622v-2.609Z"

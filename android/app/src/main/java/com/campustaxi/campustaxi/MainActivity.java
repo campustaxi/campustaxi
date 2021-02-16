@@ -1,4 +1,4 @@
-package com.campustaxi;
+package com.campustaxi.campustaxi;
 
 import android.os.Bundle;
 import org.devio.rn.splashscreen.SplashScreen;

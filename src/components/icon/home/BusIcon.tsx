@@ -4,7 +4,7 @@ import Svg, { G, Path, Rect } from 'react-native-svg';
 type Props = SVGProps<SVGElement>;
 export const BusIcon: React.FC<Props> = ({ width, height }) => {
   return (
-    <Svg width={width ?? 48} height={height ?? 48} viewBox="0 0 36.186 41.299">
+    <Svg width={width ?? 36} height={height ?? 41} viewBox="0 0 36.186 41.299">
       <G transform="translate(-167.859 -274.523)">
         <G transform="translate(175 302)" fill="#ff9515" stroke="#ff9515" stroke-width="1">
           <Rect width="6" height="3" stroke="none" />

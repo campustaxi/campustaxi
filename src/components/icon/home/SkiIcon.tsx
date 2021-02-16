@@ -4,7 +4,7 @@ import Svg, { Path } from 'react-native-svg';
 type Props = SVGProps<SVGElement>;
 export const SkiIcon: React.FC<Props> = ({ width, height }) => {
   return (
-    <Svg width={width ?? 48} height={height ?? 48} viewBox="0 0 32.502 35.142">
+    <Svg width={width ?? 32} height={height ?? 35} viewBox="0 0 32.502 35.142">
       <Path
         id="패스_26"
         data-name="패스 26"

@@ -4,7 +4,7 @@ import Svg, { G, Path } from 'react-native-svg';
 type Props = SVGProps<SVGElement>;
 export const PoolIcon: React.FC<Props> = ({ width, height }) => {
   return (
-    <Svg width={width ?? 48} height={height ?? 48} viewBox="0 0 36.119 30.946">
+    <Svg width={width ?? 36} height={height ?? 30} viewBox="0 0 36.119 30.946">
       <G id="그룹_177" data-name="그룹 177" transform="translate(-285.317 -497.465)">
         <Path
           id="패스_101"
