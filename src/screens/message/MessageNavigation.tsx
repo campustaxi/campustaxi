@@ -21,7 +21,7 @@ export const MessageNavigation = () => {
       <MessageStack.Screen
         name="MessageScreen"
         component={MessageScreen}
-        options={{ title: '내 채팅방 목록' }}
+        options={{ title: '내 채팅방 목록', headerLeft: undefined }}
       />
       <MessageStack.Screen
         name="ChatRoomScreen"

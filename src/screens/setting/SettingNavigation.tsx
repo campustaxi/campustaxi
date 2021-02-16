@@ -19,7 +19,7 @@ export const SettingNavigation = () => {
       <SettingStack.Screen
         name="SettingScreen"
         component={SettingScreen}
-        options={{ title: '설정' }}
+        options={{ title: '설정', headerLeft: undefined }}
       />
     </SettingStack.Navigator>
   );

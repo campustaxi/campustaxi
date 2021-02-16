@@ -19,7 +19,7 @@ export const NotificationNavigation = () => {
       <NotificationStack.Screen
         name="NotificationScreen"
         component={NotificationScreen}
-        options={{ title: '알림' }}
+        options={{ title: '알림', headerLeft: undefined }}
       />
     </NotificationStack.Navigator>
   );
