@@ -2,7 +2,15 @@ import styled from '@emotion/native';
 import { StackNavigationProp } from '@react-navigation/stack';
 import React from 'react';
 import { Platform } from 'react-native';
+import { BookIcon } from '../../components/icon/home/BookIcon';
+import { BusIcon } from '../../components/icon/home/BusIcon';
+import { ClubIcon } from '../../components/icon/home/ClubIcon';
+import { GameIcon } from '../../components/icon/home/GameIcon';
+import { PencilIcon } from '../../components/icon/home/PencilIcon';
+import { PoolIcon } from '../../components/icon/home/PoolIcon';
+import { RideIcon } from '../../components/icon/home/RideIcon';
 import { SchoolIcon } from '../../components/icon/home/SchoolIcon';
+import { SkiIcon } from '../../components/icon/home/SkiIcon';
 import { BlankBackground } from '../../components/layout/BlankBackground';
 import { MainLogo } from '../../components/logo/MainLogo';
 import { HomeStackParamList } from './HomeNavigation';
@@ -29,40 +37,40 @@ export const HomeScreen: React.FC<Props> = () => {
               <CardTitle>둥교</CardTitle>
             </Card>
             <Card>
-              <SchoolIcon />
-              <CardTitle>둥교</CardTitle>
+              <BusIcon />
+              <CardTitle>하교</CardTitle>
             </Card>
             <Card>
-              <SchoolIcon />
-              <CardTitle>둥교</CardTitle>
-            </Card>
-          </CardContainer>
-          <CardContainer>
-            <Card>
-              <SchoolIcon />
-              <CardTitle>둥교</CardTitle>
-            </Card>
-            <Card>
-              <SchoolIcon />
-              <CardTitle>둥교</CardTitle>
-            </Card>
-            <Card>
-              <SchoolIcon />
-              <CardTitle>둥교</CardTitle>
+              <PencilIcon />
+              <CardTitle>야작</CardTitle>
             </Card>
           </CardContainer>
           <CardContainer>
             <Card>
-              <SchoolIcon />
-              <CardTitle>둥교</CardTitle>
+              <BookIcon />
+              <CardTitle>독서실</CardTitle>
             </Card>
             <Card>
-              <SchoolIcon />
-              <CardTitle>둥교</CardTitle>
+              <GameIcon />
+              <CardTitle>PC방</CardTitle>
             </Card>
             <Card>
-              <SchoolIcon />
-              <CardTitle>둥교</CardTitle>
+              <RideIcon />
+              <CardTitle>놀이동산</CardTitle>
+            </Card>
+          </CardContainer>
+          <CardContainer>
+            <Card>
+              <ClubIcon />
+              <CardTitle>클럽</CardTitle>
+            </Card>
+            <Card>
+              <SkiIcon />
+              <CardTitle>스키</CardTitle>
+            </Card>
+            <Card>
+              <PoolIcon />
+              <CardTitle>오션월드</CardTitle>
             </Card>
           </CardContainer>
         </MainContainer>
