@@ -1,5 +1,7 @@
 import styled from '@emotion/native';
 import React from 'react';
+import RNRestart from 'react-native-restart';
+import { BlankButton } from '../../../components/button/BlankButton';
 import { BlankBackground } from '../../../components/layout/BlankBackground';
 import { RegisterLogo } from '../../../components/logo/RegisterLogo';
 
@@ -18,6 +20,18 @@ export const RegisterSuccessScreen = () => {
           이용해 주세요!
         </Description>
       </Container>
+      <BlankButton
+        backgroundColor="#CBCED7"
+        color="white"
+        onPress={() => {
+          RNRestart.Restart();
+        }}
+        paddingBottom={8}>
+        처음으로 돌아가기
+      </BlankButton>
+      <BlankButton backgroundColor="#172864" color="white" onPress={() => {}} paddingBottom={16}>
+        로그인
+      </BlankButton>
     </BlankBackground>
   );
 };
@@ -26,6 +40,7 @@ const Container = styled.View`
   justify-content: center;
   align-items: center;
   padding-top: 48px;
+  flex: 1;
 `;
 
 const LogoText = styled.Text`

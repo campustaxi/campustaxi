@@ -1,7 +1,7 @@
 import styled from '@emotion/native';
 import { NavigationProp, useNavigation } from '@react-navigation/native';
 import React, { useState } from 'react';
-import { Keyboard, Text, TouchableWithoutFeedback } from 'react-native';
+import { Keyboard, TouchableWithoutFeedback } from 'react-native';
 import { launchImageLibrary } from 'react-native-image-picker';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scrollview';
 import { BottomButton } from '../../../components/button/BottomButton';
@@ -81,14 +81,14 @@ export const RegisterScreen: React.FC = ({}) => {
                       onPress={() => {
                         setGender(1);
                       }}>
-                      <Text>남자</Text>
+                      <WhiteText>남자</WhiteText>
                     </SelectItem>
                     <SelectItem
                       active={gender === 2}
                       onPress={() => {
                         setGender(2);
                       }}>
-                      <Text>여자</Text>
+                      <WhiteText>여자</WhiteText>
                     </SelectItem>
                   </FormSelect>
                 </FormContainer>
@@ -192,7 +192,9 @@ const Code = styled.TextInput`
   border-bottom-width: 1px;
 `;
 
-const FormContainer = styled.View``;
+const FormContainer = styled.View`
+  margin-bottom: 14px;
+`;
 
 const FormDescription = styled.Text`
   color: #7d849b;
@@ -209,12 +211,15 @@ const FormInput = styled.TextInput`
 
 const FormSelect = styled.View`
   flex-direction: row;
+  margin-top: 16px;
+  justify-content: center;
 `;
 
 const SelectItem = styled.TouchableOpacity<{ active: boolean }>`
   background-color: ${({ active }) => (active ? '#e5af0b' : '#cbced7')};
   padding: 4px 36px;
   border-radius: 19px;
+  margin-right: 8px;
 `;
 
 const ImageContainer = styled.Image`
@@ -224,4 +229,8 @@ const ImageContainer = styled.Image`
   height: 500px;
   justify-content: center;
   align-self: center;
+`;
+
+const WhiteText = styled.Text`
+  color: white;
 `;
