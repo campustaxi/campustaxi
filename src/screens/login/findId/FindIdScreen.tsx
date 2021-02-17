@@ -104,14 +104,15 @@ export const FindIdScreen: React.FC = ({}) => {
 };
 
 const Container = styled.View`
-  margin-left: 64px;
-  margin-right: 64px;
+  margin-left: 24px;
+  margin-right: 24px;
 `;
 
 const RadioLine = styled.View`
-  width: 300px;
+  width: 350px;
   margin-bottom: 12px;
   border: 1px solid #e5e5e8;
+  align-self: center;
 `;
 
 const RadioContainer = styled.View``;

@@ -1,15 +1,14 @@
-import styled, { css } from '@emotion/native';
+import styled from '@emotion/native';
 import { useNavigation } from '@react-navigation/native';
 import { StackNavigationProp } from '@react-navigation/stack';
 import React, { useState } from 'react';
-import { SafeAreaView } from 'react-native';
-import RNPickerSelect from 'react-native-picker-select';
 import RadioForm, {
   RadioButton,
   RadioButtonInput,
   RadioButtonLabel,
 } from 'react-native-simple-radio-button';
 import { SimpleButton } from '../../../components/button/SimpleButton';
+import { PhoneVerification } from '../../../components/form/PhoneVerification';
 import { TextField } from '../../../components/form/TextField';
 import { BlankBackground } from '../../../components/layout/BlankBackground';
 import { SimpleText } from '../../../components/text/SImpleText';
@@ -28,15 +27,12 @@ export const FindPasswordScreen: React.FC = ({}) => {
   const [hasId, setHasId] = useState(false);
   const [method, setMethod] = useState<FindMethod>();
   const [name, setName] = useState('');
-  const [phoneCountry, setPhoneCountry] = useState('');
-  const [phone, setPhone] = useState('');
   const [sent, setSent] = useState(false);
   const [code, setCode] = useState('');
-  console.log(phoneCountry, phone, code);
 
   return !hasId ? (
     <BlankBackground>
-      <SafeAreaView>
+      <SafeContainer>
         <Container>
           <HeadContainer>
             <Title>비밀번호 찾기</Title>
@@ -59,11 +55,11 @@ export const FindPasswordScreen: React.FC = ({}) => {
             다음으로
           </SimpleButton>
         </Container>
-      </SafeAreaView>
+      </SafeContainer>
     </BlankBackground>
   ) : (
     <BlankBackground>
-      <SafeAreaView>
+      <SafeContainer>
         <Container>
           <Title centered>비밀번호 찾는 방법을 선택해 주세요.</Title>
           <RadioContainer>
@@ -91,43 +87,24 @@ export const FindPasswordScreen: React.FC = ({}) => {
                 />
               </RadioButton>
             </RadioForm>
-            <Description>
+            <Description
+              onPress={() => {
+                setMethod(FindMethod.PHONE);
+              }}>
               회원정보에 등록한 휴대전화 번호와 입력한 휴대전화 번호가 같아야, 인증번호를 받을 수
               있습니다.
             </Description>
             <RadioLine />
             {method === FindMethod.PHONE && (
-              <>
+              <PhoneContainer>
                 <Description>사용자 아이디</Description>
                 <SimpleText align="left">{id}</SimpleText>
                 <TextField value={name} setValue={setName} placeholder="이름(본명)" />
-                <PhoneContainer>
-                  <RNPickerSelect
-                    style={{
-                      inputAndroidContainer: PickerContainer,
-                      inputIOSContainer: PickerContainer,
-                      viewContainer: PickerViewContainer,
-                    }}
-                    onValueChange={(value) => setPhoneCountry(value)}
-                    items={[{ label: '+82', value: '+82' }]}
-                    value={phoneCountry}
-                    placeholder={{ label: '선택', value: '0' }}
-                  />
-                  <TextField
-                    flex={3}
-                    value={phone}
-                    setValue={setPhone}
-                    placeholder="휴대폰 번호"
-                    keyboardType="phone-pad"
-                  />
-                </PhoneContainer>
-                <SimpleButton
-                  onPress={() => {
+                <PhoneVerification
+                  onSend={() => {
                     setSent(true);
                   }}
-                  clicked={sent}>
-                  {sent ? '재전송하기' : '인증번호 전송하기'}
-                </SimpleButton>
+                />
                 {sent && (
                   <SentContainer>
                     <TextField
@@ -146,18 +123,22 @@ export const FindPasswordScreen: React.FC = ({}) => {
                     </SimpleButton>
                   </SentContainer>
                 )}
-              </>
+              </PhoneContainer>
             )}
           </RadioContainer>
         </Container>
-      </SafeAreaView>
+      </SafeContainer>
     </BlankBackground>
   );
 };
 
+const SafeContainer = styled.SafeAreaView`
+  flex: 1;
+`;
 const Container = styled.View`
-  margin-left: 36px;
-  margin-right: 36px;
+  margin-left: 24px;
+  margin-right: 24px;
+  flex: 1;
 `;
 
 const Description = styled.Text`
@@ -168,25 +149,14 @@ const Description = styled.Text`
 `;
 
 const RadioLine = styled.View`
-  width: 300px;
+  width: 350px;
   margin-bottom: 12px;
   border: 1px solid #e5e5e8;
+  align-self: center;
 `;
 
-const RadioContainer = styled.View``;
-
-const PhoneContainer = styled.View`
-  flex-direction: row;
-  margin-bottom: 24px;
-`;
-
-const PickerViewContainer = css`
+const RadioContainer = styled.View`
   flex: 1;
-`;
-const PickerContainer = css`
-  padding: 8px;
-  border-radius: 8px;
-  border: 2px solid rgba(149, 149, 149, 0.09);
 `;
 
 const SentContainer = styled.View`
@@ -204,4 +174,8 @@ const DescriptionContainer = styled.View`
 const IdText = styled.Text`
   color: #7d849b;
   font-weight: bold;
+`;
+
+const PhoneContainer = styled.View`
+  flex: 1;
 `;

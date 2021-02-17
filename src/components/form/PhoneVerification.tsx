@@ -18,9 +18,11 @@ export const PhoneVerification: React.FC<Props> = ({ onSend }) => {
             inputAndroidContainer: PickerContainer,
             inputIOSContainer: PickerContainer,
             viewContainer: PickerViewContainer,
+            placeholder: PickerText,
+            inputAndroid: PickerText,
           }}
           onValueChange={(value) => setPhoneCountry(value)}
-          items={[{ label: '+82', value: '+82' }]}
+          items={[{ label: '+82', value: '82' }]}
           value={phoneCountry}
           placeholder={{ label: '선택', value: '0' }}
         />
@@ -52,17 +54,21 @@ const PhoneContainer = styled.View`
 `;
 
 const PhoneNumber = styled.TextInput`
-  flex: 3;
+  flex: 5;
   padding: 8px;
   border: 2px solid rgba(149, 149, 149, 0.09);
   border-radius: 8px;
 `;
 
 const PickerViewContainer = css`
-  flex: 1;
+  flex: 2;
+  border: 2px solid rgba(149, 149, 149, 0.09);
+  border-radius: 8px;
 `;
 const PickerContainer = css`
   padding: 8px;
-  border-radius: 8px;
-  border: 2px solid rgba(149, 149, 149, 0.09);
+`;
+
+const PickerText = css`
+  color: black;
 `;
