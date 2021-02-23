@@ -12,7 +12,7 @@ import { APIData, Gender } from '../message/MessageScreen';
 import { HomeStackParamList } from './HomeNavigation';
 
 type HomeScreenRoute = RouteProp<HomeStackParamList, 'CategoryChatListScreen'>;
-type HomeScreenNavigationo = NavigationProp<HomeStackParamList, 'ChatRoomScreen'>;
+type HomeScreenNavigationo = NavigationProp<HomeStackParamList, 'CategoryChatListScreen'>;
 
 export const CategoryChatListScreen: React.FC = () => {
   const { params } = useRoute<HomeScreenRoute>();
@@ -20,10 +20,12 @@ export const CategoryChatListScreen: React.FC = () => {
   const [datas, setDatas] = useState<ChatRoom[]>();
   const { token } = useAuthContext();
 
+  const handleCreateChat = () => navigate('CreateChatScreen');
+
   useEffect(() => {
     if (params.categoryName) {
       axios
-        .get<APIData>(`${API_URL}/api/v1/rooms/?category=${params.categoryName}`, {
+        .get<APIData>(`${API_URL}/api/v1/rooms/?category=1`, {
           headers: {
             Authorization: `Bearer ${token}`,
           },
@@ -58,10 +60,37 @@ export const CategoryChatListScreen: React.FC = () => {
           }}
         />
       </Container>
+      <CreateButton onPress={handleCreateChat}>
+        <PlusIcon>+</PlusIcon>
+        <ButtonText>방만들기</ButtonText>
+      </CreateButton>
     </BlankBackground>
   );
 };
 const Container = styled.SafeAreaView`
   flex: 1;
   padding-top: ${Platform.OS === 'android' && '45px'};
+`;
+
+const CreateButton = styled.TouchableOpacity`
+  position: absolute;
+  bottom: 5%;
+  right: 5%;
+  width: 80px;
+  height: 80px;
+  justify-content: center;
+  align-items: center;
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16);
+  background-color: #f8b73c;
+  border-radius: 40px;
+`;
+
+const PlusIcon = styled.Text`
+  margin-top: -16px;
+  color: white;
+  font-size: 48px;
+`;
+
+const ButtonText = styled.Text`
+  color: white;
 `;
