@@ -14,7 +14,7 @@ import { SchoolIcon } from '../../components/icon/home/SchoolIcon';
 import { SkiIcon } from '../../components/icon/home/SkiIcon';
 import { BlankBackground } from '../../components/layout/BlankBackground';
 import { MainLogo } from '../../components/logo/MainLogo';
-import { HomeStackParamList } from './HomeNavigation';
+import { HomeStackParamList } from '../tab/HomeStackNavigation';
 
 type HomeScreenNavigation = StackNavigationProp<HomeStackParamList, 'HomeScreen'>;
 

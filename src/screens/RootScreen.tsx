@@ -1,10 +1,10 @@
 import React from 'react';
 import { useAuthContext } from '../contexts/AuthContext';
 import { LoginNavigation } from './login/LoginNavigation';
-import { HomeTabNavigation } from './tab/HomeTabNavigation';
+import { HomeStackNavigation } from './tab/HomeStackNavigation';
 
 export const RootScreen = () => {
   const { isLoggedIn } = useAuthContext();
 
-  return isLoggedIn ? <HomeTabNavigation /> : <LoginNavigation />;
+  return isLoggedIn ? <HomeStackNavigation /> : <LoginNavigation />;
 };

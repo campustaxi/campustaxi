@@ -2,10 +2,10 @@ import { createStackNavigator } from '@react-navigation/stack';
 import React from 'react';
 import { BackIcon } from '../../components/icon/BackIcon';
 import { CloseIcon } from '../../components/icon/CloseIcon';
+import { CategoryChatListScreen } from '../home/CategoryChatListScreen';
+import { CreateChatScreen } from '../home/CreateChatScreen';
 import { ChatRoomScreen } from '../message/ChatRoomScreen';
-import { CategoryChatListScreen } from './CategoryChatListScreen';
-import { CreateChatScreen } from './CreateChatScreen';
-import { HomeScreen } from './HomeScreen';
+import { HomeTabNavigation } from './HomeTabNavigation';
 
 export type HomeStackParamList = {
   HomeScreen: undefined;
@@ -15,12 +15,16 @@ export type HomeStackParamList = {
 };
 const HomeStack = createStackNavigator<HomeStackParamList>();
 
-export const HomeNavigation: React.FC = ({}) => {
+export const HomeStackNavigation: React.FC = ({}) => {
   return (
     <HomeStack.Navigator
       initialRouteName="HomeScreen"
       screenOptions={{ headerLeft: ({ onPress }) => <BackIcon onPress={onPress} /> }}>
-      <HomeStack.Screen name="HomeScreen" component={HomeScreen} options={{ headerShown: false }} />
+      <HomeStack.Screen
+        name="HomeScreen"
+        component={HomeTabNavigation}
+        options={{ headerShown: false }}
+      />
       <HomeStack.Screen
         name="CategoryChatListScreen"
         component={CategoryChatListScreen}

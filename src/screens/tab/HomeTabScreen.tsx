@@ -1,7 +1,7 @@
 import { useIsFocused } from '@react-navigation/native';
 import React, { useEffect } from 'react';
 import { Platform, StatusBar } from 'react-native';
-import { HomeNavigation } from '../home/HomeNavigation';
+import { HomeScreen } from '../home/HomeScreen';
 
 export const HomeTabScreen = () => {
   const isFocused = useIsFocused();
@@ -14,5 +14,5 @@ export const HomeTabScreen = () => {
     }
   }, [isFocused]);
 
-  return <HomeNavigation />;
+  return <HomeScreen />;
 };

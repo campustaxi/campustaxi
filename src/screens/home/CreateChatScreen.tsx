@@ -1,6 +1,6 @@
 import styled from '@emotion/native';
 import React, { useEffect, useState } from 'react';
-import { Platform } from 'react-native';
+import { Platform, Text, TextInput } from 'react-native';
 import Geolocation from 'react-native-geolocation-service';
 import NaverMapView, { Coord, Marker } from 'react-native-nmap';
 import { BottomButton } from '../../components/button/BottomButton';
@@ -9,18 +9,20 @@ import { BlankBackground } from '../../components/layout/BlankBackground';
 export const CreateChatScreen: React.FC = () => {
   const [gender, setGender] = useState<number>();
   const [isMapView, setIsMapView] = useState(false);
-  const [coordinate, setCoordinate] = useState<Coord>();
+  const [coordinate, setCoordinate] = useState<Coord & { zoom: number }>();
   useEffect(() => {
     if (Platform.OS === 'ios') {
       Geolocation.requestAuthorization('whenInUse');
     }
     Geolocation.getCurrentPosition(
       (position) => {
-        setCoordinate({ latitude: position.coords.latitude, longitude: position.coords.longitude });
+        setCoordinate({
+          latitude: position.coords.latitude,
+          longitude: position.coords.longitude,
+          zoom: 18,
+        });
       },
-      (error) => {
-        console.log(error.code, error.message);
-      },
+      () => {},
       { enableHighAccuracy: true, timeout: 15000, maximumAge: 10000 },
     );
   }, []);
@@ -30,14 +32,21 @@ export const CreateChatScreen: React.FC = () => {
   if (isMapView) {
     return (
       <Container>
-        <NaverMapView
-          style={{ width: '100%', height: '100%' }}
-          onCameraChange={({ latitude, longitude }) => {
-            setCoordinate({ latitude, longitude });
+        <NaverMap
+          center={coordinate}
+          onCameraChange={({ latitude, longitude, zoom }) => {
+            setCoordinate({ latitude, longitude, zoom });
           }}
-          showsMyLocationButton>
-          <Marker coordinate={coordinate} onClick={() => console.warn('onClick! p0')} />
-        </NaverMapView>
+          zoomGesturesEnabled>
+          <Marker coordinate={coordinate} />
+        </NaverMap>
+        <AddressContainer>
+          <Text>출발지:</Text>
+          <TextInput />
+          <Hr />
+          <Text>도착지:</Text>
+          <TextInput />
+        </AddressContainer>
         <BottomButton onPress={() => {}}>선택하기</BottomButton>
       </Container>
     );
@@ -152,4 +161,20 @@ const WhiteText = styled.Text`
   color: white;
   font-size: 15px;
   font-weight: bold;
+`;
+
+const NaverMap = styled(NaverMapView)`
+  flex: 2;
+`;
+
+const AddressContainer = styled.View`
+  flex: 1;
+  background-color: #fff;
+`;
+
+const Hr = styled.View`
+  width: 325px;
+  height: 0;
+  margin: 28.5px 0 0;
+  border: solid 1px #e5e5e8;
 `;
