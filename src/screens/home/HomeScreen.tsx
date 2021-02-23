@@ -23,6 +23,7 @@ export const HomeScreen: React.FC = () => {
 
   const handleClick = (category: string) => () =>
     navigate('CategoryChatListScreen', { categoryName: category });
+
   return (
     <BlankBackground color="#0d3664">
       <Container>

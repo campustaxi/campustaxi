@@ -1,5 +1,5 @@
 import styled from '@emotion/native';
-import { RouteProp, useRoute } from '@react-navigation/native';
+import { NavigationProp, RouteProp, useNavigation, useRoute } from '@react-navigation/native';
 import axios from 'axios';
 import { format } from 'date-fns';
 import React, { useEffect, useState } from 'react';
@@ -12,9 +12,11 @@ import { APIData, Gender } from '../message/MessageScreen';
 import { HomeStackParamList } from './HomeNavigation';
 
 type HomeScreenRoute = RouteProp<HomeStackParamList, 'CategoryChatListScreen'>;
+type HomeScreenNavigationo = NavigationProp<HomeStackParamList, 'ChatRoomScreen'>;
 
 export const CategoryChatListScreen: React.FC = () => {
   const { params } = useRoute<HomeScreenRoute>();
+  const { navigate } = useNavigation<HomeScreenNavigationo>();
   const [datas, setDatas] = useState<ChatRoom[]>();
   const { token } = useAuthContext();
 
@@ -52,7 +54,7 @@ export const CategoryChatListScreen: React.FC = () => {
         <ChatRoomList
           datas={datas}
           onPress={(id: number) => () => {
-            // navigation.navigate('ChatRoomScreen', { id });
+            navigate('ChatRoomScreen', { id });
           }}
         />
       </Container>
