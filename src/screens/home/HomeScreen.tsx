@@ -1,4 +1,5 @@
 import styled from '@emotion/native';
+import { useNavigation } from '@react-navigation/native';
 import { StackNavigationProp } from '@react-navigation/stack';
 import React from 'react';
 import { Platform } from 'react-native';
@@ -15,12 +16,13 @@ import { BlankBackground } from '../../components/layout/BlankBackground';
 import { MainLogo } from '../../components/logo/MainLogo';
 import { HomeStackParamList } from './HomeNavigation';
 
-type HomeScreenNavigationProp = StackNavigationProp<HomeStackParamList, 'HomeScreen'>;
+type HomeScreenNavigation = StackNavigationProp<HomeStackParamList, 'HomeScreen'>;
 
-type Props = {
-  navigation: HomeScreenNavigationProp;
-};
-export const HomeScreen: React.FC<Props> = () => {
+export const HomeScreen: React.FC = () => {
+  const { navigate } = useNavigation<HomeScreenNavigation>();
+
+  const handleClick = (category: string) => () =>
+    navigate('CategoryChatListScreen', { categoryName: category });
   return (
     <BlankBackground color="#0d3664">
       <Container>
@@ -32,43 +34,43 @@ export const HomeScreen: React.FC<Props> = () => {
         </BannerContainer>
         <MainContainer>
           <CardContainer>
-            <Card>
+            <Card onPress={handleClick('등교')}>
               <SchoolIcon />
               <CardTitle>등교</CardTitle>
             </Card>
-            <Card>
+            <Card onPress={handleClick('하교')}>
               <BusIcon />
               <CardTitle>하교</CardTitle>
             </Card>
-            <Card>
+            <Card onPress={handleClick('야작')}>
               <PencilIcon />
               <CardTitle>야작</CardTitle>
             </Card>
           </CardContainer>
           <CardContainer>
-            <Card>
+            <Card onPress={handleClick('독서실')}>
               <BookIcon />
               <CardTitle>독서실</CardTitle>
             </Card>
-            <Card>
+            <Card onPress={handleClick('PC방')}>
               <GameIcon />
               <CardTitle>PC방</CardTitle>
             </Card>
-            <Card>
+            <Card onPress={handleClick('놀이동산')}>
               <RideIcon />
               <CardTitle>놀이동산</CardTitle>
             </Card>
           </CardContainer>
           <CardContainer>
-            <Card>
+            <Card onPress={handleClick('클럽')}>
               <ClubIcon />
               <CardTitle>클럽</CardTitle>
             </Card>
-            <Card>
+            <Card onPress={handleClick('스키')}>
               <SkiIcon />
               <CardTitle>스키</CardTitle>
             </Card>
-            <Card>
+            <Card onPress={handleClick('오션월드')}>
               <PoolIcon />
               <CardTitle>오션월드</CardTitle>
             </Card>

@@ -1,41 +1,23 @@
 import styled from '@emotion/native';
-import { useNavigation } from '@react-navigation/native';
 import { StackNavigationProp } from '@react-navigation/stack';
 import axios from 'axios';
 import { format } from 'date-fns';
 import React, { useEffect, useState } from 'react';
-import { ScrollView } from 'react-native';
+import { Platform } from 'react-native';
 import { ChatRoom, ChatRoomList } from '../../components/chat-room/ChatRoomList';
+import { BlankBackground } from '../../components/layout/BlankBackground';
 import { API_URL } from '../../constant';
 import { useAuthContext } from '../../contexts/AuthContext';
-import { MessageStackParamList } from './MessageNavigation';
+import { APIData, Gender } from '../message/MessageScreen';
+import { HomeStackParamList } from './HomeNavigation';
 
-type MessageNavigation = StackNavigationProp<MessageStackParamList, 'MessageScreen'>;
+type HomeScreenNavigation = StackNavigationProp<HomeStackParamList, 'HomeScreen'>;
 
-export const Gender = ['여자', '남자'];
-export type APIData = {
-  count: number;
-  next: number;
-  previous: number;
-
-  results: {
-    id: number;
-    gender: number;
-    personnel_limit: number;
-    current: number;
-    boarding_dtm: string;
-    start_address: string;
-    end_address: string;
-  }[];
-};
-
-export const MessageScreen: React.FC = () => {
+export const CategoryChatListScreen: React.FC = () => {
   const [datas, setDatas] = useState<ChatRoom[]>();
   const { token } = useAuthContext();
-  const navigation = useNavigation<MessageNavigation>();
 
   useEffect(() => {
-    console.log('token', token);
     axios
       .get<APIData>(`${API_URL}/api/v1/rooms/`, {
         headers: {
@@ -61,20 +43,20 @@ export const MessageScreen: React.FC = () => {
   if (!datas || datas.length <= 0) {
     return <></>;
   }
-
   return (
-    <Container>
-      <ScrollView>
+    <BlankBackground color="#fff">
+      <Container>
         <ChatRoomList
           datas={datas}
           onPress={(id: number) => () => {
-            navigation.navigate('ChatRoomScreen', { id });
+            // navigation.navigate('ChatRoomScreen', { id });
           }}
         />
-      </ScrollView>
-    </Container>
+      </Container>
+    </BlankBackground>
   );
 };
 const Container = styled.SafeAreaView`
   flex: 1;
+  padding-top: ${Platform.OS === 'android' && '45px'};
 `;
