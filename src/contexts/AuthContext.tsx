@@ -48,20 +48,39 @@ export const AuthProvider: React.FC = ({ children }) => {
     }
   }, [setRefresh]);
 
+  const refreshToken = useCallback(() => {
+    axios
+      .post<{ access: string }>(`${API_URL}/accounts/token/refresh/`, { refresh })
+      .then((response) => {
+        if (response.data.access) {
+          setToken(response.data.access);
+        }
+        setIsLoading(false);
+      });
+  }, [refresh]);
+
   useEffect(() => {
     getRefreshToken();
   }, [getRefreshToken]);
 
   useEffect(() => {
     if (refresh) {
-      axios.post<{ access: string }>(`${API_URL}/accounts/token/refresh/`).then((response) => {
-        if (response.data.access) {
-          setToken(response.data.access);
-        }
-        setIsLoading(false);
-      });
+      refreshToken();
     }
-  }, [refresh, setToken]);
+  }, [refresh, refreshToken]);
+
+  useEffect(() => {
+    if (refresh && token) {
+      const interval = setInterval(() => {
+        axios.post(`${API_URL}/accounts/token/verify/`, { token }).then((response) => {
+          if (response.data.code) {
+            refreshToken();
+          }
+        });
+      }, 600000);
+      return () => clearInterval(interval);
+    }
+  }, [token, refresh, refreshToken]);
 
   return (
     <AuthContext.Provider
