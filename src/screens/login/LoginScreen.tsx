@@ -25,13 +25,15 @@ export const LoginScreen: React.FC = ({}) => {
   const { setLoggedIn } = useAuthContext();
 
   const login = async () => {
-    const { data } = await axios.post<{ token: string }>(`${API_URL}/auth/login/`, {
-      username: id,
-      password: password,
-    });
-    console.log(data);
-    if (data.token) {
-      setLoggedIn(data.token);
+    const { data } = await axios.post<{ access: string; refresh: string }>(
+      `${API_URL}/accounts/token/`,
+      {
+        username: id,
+        password: password,
+      },
+    );
+    if (data.access && data.refresh) {
+      setLoggedIn(data.access, data.refresh);
     }
   };
 

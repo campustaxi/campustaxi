@@ -14,13 +14,19 @@ type MessageNavigation = StackNavigationProp<MessageStackParamList, 'MessageScre
 
 const Gender = ['여자', '남자'];
 type APIData = {
-  meeting_dtm: Date;
-  gender: number;
-  person_maximum: number;
-  person_current: number;
-  room_type: string;
-  owner: boolean;
-  member: number[];
+  count: number;
+  next: number;
+  previous: number;
+
+  results: {
+    id: number;
+    gender: number;
+    personnel_limit: number;
+    current: number;
+    boarding_dtm: string;
+    start_address: string;
+    end_address: string;
+  }[];
 };
 
 export const MessageScreen: React.FC = () => {
@@ -29,22 +35,23 @@ export const MessageScreen: React.FC = () => {
   const navigation = useNavigation<MessageNavigation>();
 
   useEffect(() => {
+    console.log('token', token);
     axios
-      .get<APIData[]>(`${API_URL}/api/v1/rooms/`, {
+      .get<APIData>(`${API_URL}/api/v1/rooms/`, {
         headers: {
-          Authorization: `Token ${token}`,
+          Authorization: `Bearer ${token}`,
         },
       })
       .then((response) => {
-        const data = response.data.map((item) => ({
+        const data = response.data.results.map((item) => ({
           id: 1,
           gender: Gender[item.gender] ?? '남 여',
           title: 'title',
-          currentCount: item.person_current,
-          maxCount: item.person_maximum,
-          time: format(new Date(item.meeting_dtm), 'HH:MM'),
-          startLocation: '1',
-          arriveLocation: '2',
+          currentCount: item.current,
+          maxCount: item.personnel_limit,
+          time: format(new Date(item.boarding_dtm), 'HH:MM'),
+          startLocation: item.start_address,
+          arriveLocation: item.end_address,
           unreadMessage: '300+',
         }));
         setDatas(data);

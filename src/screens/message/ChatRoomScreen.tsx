@@ -21,8 +21,38 @@ export type Message = {
   updated_at: Date;
 };
 
+const data = [
+  {
+    id: 1,
+    message: 'hello',
+    message_type: 'Message',
+    writer: 1,
+    room: 1,
+    created_at: new Date(),
+    updated_at: new Date(),
+  },
+  {
+    id: 2,
+    message: 'hello',
+    message_type: 'Message',
+    writer: 1,
+    room: 1,
+    created_at: new Date(),
+    updated_at: new Date(),
+  },
+  {
+    id: 3,
+    message: 'hello',
+    message_type: 'Message',
+    writer: 2,
+    room: 1,
+    created_at: new Date(),
+    updated_at: new Date(),
+  },
+];
+
 export const ChatRoomScreen: React.FC = () => {
-  const [datas, setDatas] = useState<Message[]>();
+  const [datas, setDatas] = useState<Message[]>(data);
   const [message, setMessage] = useState('');
   const { token } = useAuthContext();
   const route = useRoute<NavigationRoute>();
@@ -49,7 +79,7 @@ export const ChatRoomScreen: React.FC = () => {
           const data = response.data.sort((a, b) =>
             differenceInMilliseconds(new Date(a.created_at), new Date(b.created_at)),
           );
-          setDatas(data);
+          // setDatas(data);
         });
     }
   }, [id, token, refetch]);

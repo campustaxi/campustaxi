@@ -1,11 +1,13 @@
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import axios from 'axios';
 import React, { useCallback, useContext, useEffect, useState } from 'react';
+import { API_URL } from '../constant';
 
 export type AuthState = {
   token: string | undefined;
   isLoading: boolean;
   isLoggedIn: boolean;
-  setLoggedIn: (token: string) => void;
+  setLoggedIn: (token: string, refresh: string) => void;
   setLoggedOut: () => void;
 };
 
@@ -21,32 +23,45 @@ export const useAuthContext = () => useContext(AuthContext);
 
 export const AuthProvider: React.FC = ({ children }) => {
   const [token, setToken] = useState<string | undefined>();
+  const [refresh, setRefresh] = useState<string | undefined>();
   const [isLoading, setIsLoading] = useState<boolean>(true);
 
   const setLoggedIn = useCallback(
-    (tokenData: string) => {
-      AsyncStorage.setItem('@campus_taxi_auth', tokenData);
-      setToken(tokenData);
+    (accessData: string, refreshData: string) => {
+      AsyncStorage.setItem('@campus_taxi_auth', refreshData);
+      setRefresh(refreshData);
+      setToken(accessData);
     },
-    [setToken],
+    [setRefresh, setToken],
   );
 
   const setLoggedOut = useCallback(() => {
     AsyncStorage.setItem('@campus_taxi_auth', '');
+    setRefresh(undefined);
     setToken(undefined);
-  }, [setToken]);
+  }, [setRefresh, setToken]);
 
-  const getToken = useCallback(async () => {
+  const getRefreshToken = useCallback(async () => {
     const data = await AsyncStorage.getItem('@campus_taxi_auth');
     if (data) {
-      setToken(data);
+      setRefresh(data);
     }
-    setIsLoading(false);
-  }, [setIsLoading, setToken]);
+  }, [setRefresh]);
 
   useEffect(() => {
-    getToken();
-  }, [getToken]);
+    getRefreshToken();
+  }, [getRefreshToken]);
+
+  useEffect(() => {
+    if (refresh) {
+      axios.post<{ access: string }>(`${API_URL}/accounts/token/refresh/`).then((response) => {
+        if (response.data.access) {
+          setToken(response.data.access);
+        }
+        setIsLoading(false);
+      });
+    }
+  }, [refresh, setToken]);
 
   return (
     <AuthContext.Provider
