@@ -5,7 +5,7 @@ import Svg, { G, Path } from 'react-native-svg';
 type Props = {
   onPress?: () => void;
 };
-export const CloseButton: React.FC<Props> = ({ onPress }) => {
+export const CloseIcon: React.FC<Props> = ({ onPress }) => {
   return (
     <Box onPress={onPress}>
       <Svg width="14.614" height="14.614" viewBox="0 0 14.614 14.614">
