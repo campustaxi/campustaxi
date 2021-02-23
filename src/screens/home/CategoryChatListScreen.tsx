@@ -1,5 +1,5 @@
 import styled from '@emotion/native';
-import { StackNavigationProp } from '@react-navigation/stack';
+import { RouteProp, useRoute } from '@react-navigation/native';
 import axios from 'axios';
 import { format } from 'date-fns';
 import React, { useEffect, useState } from 'react';
@@ -11,34 +11,37 @@ import { useAuthContext } from '../../contexts/AuthContext';
 import { APIData, Gender } from '../message/MessageScreen';
 import { HomeStackParamList } from './HomeNavigation';
 
-type HomeScreenNavigation = StackNavigationProp<HomeStackParamList, 'HomeScreen'>;
+type HomeScreenRoute = RouteProp<HomeStackParamList, 'CategoryChatListScreen'>;
 
 export const CategoryChatListScreen: React.FC = () => {
+  const { params } = useRoute<HomeScreenRoute>();
   const [datas, setDatas] = useState<ChatRoom[]>();
   const { token } = useAuthContext();
 
   useEffect(() => {
-    axios
-      .get<APIData>(`${API_URL}/api/v1/rooms/`, {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      })
-      .then((response) => {
-        const data = response.data.results.map((item) => ({
-          id: 1,
-          gender: Gender[item.gender] ?? '남 여',
-          title: 'title',
-          currentCount: item.current,
-          maxCount: item.personnel_limit,
-          time: format(new Date(item.boarding_dtm), 'HH:MM'),
-          startLocation: item.start_address,
-          arriveLocation: item.end_address,
-          unreadMessage: '300+',
-        }));
-        setDatas(data);
-      });
-  }, [token]);
+    if (params.categoryName) {
+      axios
+        .get<APIData>(`${API_URL}/api/v1/rooms/?category=${params.categoryName}`, {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        })
+        .then((response) => {
+          const data = response.data.results.map((item) => ({
+            id: 1,
+            gender: Gender[item.gender] ?? '남 여',
+            title: 'title',
+            currentCount: item.current,
+            maxCount: item.personnel_limit,
+            time: format(new Date(item.boarding_dtm), 'HH:MM'),
+            startLocation: item.start_address,
+            arriveLocation: item.end_address,
+            unreadMessage: '300+',
+          }));
+          setDatas(data);
+        });
+    }
+  }, [params.categoryName, token]);
 
   if (!datas || datas.length <= 0) {
     return <></>;
