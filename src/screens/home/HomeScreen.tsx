@@ -1,7 +1,8 @@
 import styled from '@emotion/native';
 import { StackNavigationProp } from '@react-navigation/stack';
+import { useNavigation } from '@react-navigation/native';
 import React from 'react';
-import { Platform } from 'react-native';
+import { Platform, Button } from 'react-native';
 import { BookIcon } from '../../components/icon/home/BookIcon';
 import { BusIcon } from '../../components/icon/home/BusIcon';
 import { ClubIcon } from '../../components/icon/home/ClubIcon';
@@ -9,6 +10,7 @@ import { GameIcon } from '../../components/icon/home/GameIcon';
 import { PencilIcon } from '../../components/icon/home/PencilIcon';
 import { PoolIcon } from '../../components/icon/home/PoolIcon';
 import { RideIcon } from '../../components/icon/home/RideIcon';
+import { EtcIcon } from '../../components/icon/home/EtcIcon';
 import { SchoolIcon } from '../../components/icon/home/SchoolIcon';
 import { SkiIcon } from '../../components/icon/home/SkiIcon';
 import { BlankBackground } from '../../components/layout/BlankBackground';
@@ -20,7 +22,9 @@ type HomeScreenNavigationProp = StackNavigationProp<HomeStackParamList, 'HomeScr
 type Props = {
   navigation: HomeScreenNavigationProp;
 };
+
 export const HomeScreen: React.FC<Props> = () => {
+  const { navigate } = useNavigation<HomeScreenNavigationProp>();
   return (
     <BlankBackground color="#0d3664">
       <Container>
@@ -41,38 +45,11 @@ export const HomeScreen: React.FC<Props> = () => {
               <CardTitle>하교</CardTitle>
             </Card>
             <Card>
-              <PencilIcon />
-              <CardTitle>야작</CardTitle>
+              <EtcIcon />
+              <CardTitle>기타</CardTitle>
             </Card>
           </CardContainer>
-          <CardContainer>
-            <Card>
-              <BookIcon />
-              <CardTitle>독서실</CardTitle>
-            </Card>
-            <Card>
-              <GameIcon />
-              <CardTitle>PC방</CardTitle>
-            </Card>
-            <Card>
-              <RideIcon />
-              <CardTitle>놀이동산</CardTitle>
-            </Card>
-          </CardContainer>
-          <CardContainer>
-            <Card>
-              <ClubIcon />
-              <CardTitle>클럽</CardTitle>
-            </Card>
-            <Card>
-              <SkiIcon />
-              <CardTitle>스키</CardTitle>
-            </Card>
-            <Card>
-              <PoolIcon />
-              <CardTitle>오션월드</CardTitle>
-            </Card>
-          </CardContainer>
+          <Button title="방만들기" onPress={() => navigate("CreateScreen")}/>
         </MainContainer>
       </Container>
     </BlankBackground>
