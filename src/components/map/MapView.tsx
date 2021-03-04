@@ -1,12 +1,14 @@
 import styled from '@emotion/native';
 import React, { Dispatch, SetStateAction } from 'react';
 import NaverMapView, { Circle, Marker, Path, Polyline, Polygon } from "react-native-nmap";
+import { Dimensions } from 'react-native';
+import { View } from 'react-native';
+const windowWidth = Dimensions.get('window').width;
+const windowHeight = Dimensions.get('window').height;
 
 type Props = {
   // setValue: Dispatch<SetStateAction<any>>;
   list?: string;
-  width?: number;
-  height?: number;
   onTouch: () => void;
   onCameraChange: () => void;
   onMapClick: () => void;
@@ -20,14 +22,13 @@ const P2 = { latitude: 37.565383, longitude: 126.976292 };
 export const MapView: React.FC<Props> = ({
   // setValue,
   list,
-  width,
-  height,
   onTouch,
   onCameraChange,
   onMapClick
 }) => {
   return (
-    <NaverMapView style={{ width: width, height: height }}
+    <>
+      <NaverMapView style={{ width: '100%', height: '100%'  }}
         showsMyLocationButton={true}
         center={{ ...P0, zoom: 16 }}
       onTouch={onTouch}
@@ -41,6 +42,7 @@ export const MapView: React.FC<Props> = ({
     <Circle coordinate={P0} color={"rgba(255,0,0,0.3)"} radius={200} onClick={() => console.log('onClick! circle')} />
     <Polygon coordinates={[P0, P1, P2]} color={`rgba(0, 0, 0, 0.5)`} onClick={() => console.log('onClick! polygon')} />
       </NaverMapView>
+    </>
   );
 };
 

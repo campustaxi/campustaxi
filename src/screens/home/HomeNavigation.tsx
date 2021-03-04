@@ -10,10 +10,11 @@ export type HomeStackParamList = {
 const HomeStack = createStackNavigator<HomeStackParamList>();
 
 export const HomeNavigation = () => {
+  
   return (
-    <HomeStack.Navigator initialRouteName="HomeScreen" headerMode="none">
-      <HomeStack.Screen name="HomeScreen" component={HomeScreen} />
-      <HomeStack.Screen name="CreateScreen" component={CreateScreen} />
+    <HomeStack.Navigator  initialRouteName="HomeScreen" >
+      <HomeStack.Screen name="HomeScreen" options={{headerShown: false}} component={HomeScreen} />
+      <HomeStack.Screen name="CreateScreen" options={{ title: "지도 선택" }}component={CreateScreen} />
     </HomeStack.Navigator>
   );
 };
