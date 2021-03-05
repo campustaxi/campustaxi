@@ -64,19 +64,7 @@ export function CreateScreen() {
 			<MapRoomCard key={list[0].id} data={list[0]} backgroundColor={"rgba(233,235,255,0.8)"} onPress={() => { return () => console.log("CreateScreenpress"); }}/>
 		</SelectedRoomView>
 		<SelectedBottomView>
-			{/* <BoxView>
-				<LeftView>
-					<EtaText>예상시간</EtaText>
-					<RowView>
-					<MinText>18분</MinText>
-					<DistanceText>5km</DistanceText>
-					</RowView>
-				</LeftView>
-				<RightView>
-					<FeeText>예상금액</FeeText>
-					<CoseText>약 6,700원~</CostText>
-				</RightView>
-			</BoxView> */}
+			{/* <BoxView>› */}
 		</SelectedBottomView>
 		<BottomButtonView>
 			{/* <Button onPress={() => console.log("createroom")} color={"#152c64"}title="방 만들기"/> */}
