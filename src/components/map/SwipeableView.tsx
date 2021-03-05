@@ -2,14 +2,29 @@ import styled from '@emotion/native';
 import React, { Dispatch, SetStateAction, useRef, useEffect } from 'react';
 import { Modalize } from 'react-native-modalize';
 import { View, Text, StyleSheet, Button, Dimensions } from 'react-native';
+import { MapRoomCard } from './MapRoomCard';
+
 const windowWidth = Dimensions.get('window').width;
 const windowHeight = Dimensions.get('window').height;
+export type ChatRoom = {
+	id: number;
+	gender: string;
+	title: string;
+	currentCount: number;
+	maxCount: number;
+	time: string;
+	startLocation: string;
+	arriveLocation: string;
+	unreadMessage?: string;
+};
 
 type Props = {
-  list?: string;
+	datas: ChatRoom[];
+	onPress: (id: number) => () => void;
 };
 export const SwipeableView: React.FC<Props> = ({
-  list,
+	datas,
+	onPress
 }) => {
 	const modalizeRef = useRef<Modalize>(null);
 	const onOpen = () => {
@@ -17,18 +32,18 @@ export const SwipeableView: React.FC<Props> = ({
 	};
 	return (
 		<>
-		<View style={{ height:'70%', width: '100%', position: 'absolute', bottom: 0 }}>
-				<Modalize alwaysOpen={60} ref={modalizeRef}
-					overlayStyle={{backgroundColor:'rgba(0,0,0,0)'}}
+		<View style={{ height:'76%', width: '100%', position: 'absolute', bottom: 0 }}>
+				<Modalize alwaysOpen={30} ref={modalizeRef}
+					overlayStyle={{ backgroundColor: 'rgba(0,0,0,0)' }}
 					handlePosition="inside"
-					modalStyle={{ backgroundColor: 'rgba(255,250,240,0.9)' }}
-					onBackButtonPress={() => { console.log("press"); return true }}
-				><Text>asd</Text></Modalize>
+					handleStyle={{ backgroundColor: "#707070" }}
+					modalStyle={{ backgroundColor: 'rgba(255,250,240,0.9)', padding: 10, marginHorizontal: 5, paddingTop:30 }}
+				>
+					{datas.map((data) => (
+						<MapRoomCard key={data.id} data={data} onPress={onPress(data.id)} />
+					))}
+				</Modalize>
 			</View>
-		{/* <View style={{ width: '100%', position: 'absolute', bottom: 0 }}>
-			<Button color="white" onPress={onOpen} title="" />
-
-			</View> */}
 			</>
   );
 };

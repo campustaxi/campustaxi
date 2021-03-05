@@ -42,3 +42,11 @@ const Box = styled.TextInput<{ flex?: number; centered?: boolean }>`
   margin-bottom: 12px;
   text-align: ${({ centered }) => centered && 'center'};
 `;
+// const NaverMapView = styled.NaverMapView<{ flex?: number; centered?: boolean }>`
+//   flex: ${({ flex }) => flex};
+//   padding: 8px;
+//   border: 2px solid rgba(149, 149, 149, 0.09);
+//   border-radius: 8px;
+//   margin-bottom: 12px;
+//   text-align: ${({ centered }) => centered && 'center'};
+// `;

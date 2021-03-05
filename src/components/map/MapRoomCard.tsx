@@ -1,46 +1,43 @@
 import styled from '@emotion/native';
 import React from 'react';
 import { Text } from 'react-native';
-import { ChatRoom } from './ChatRoomList';
+import { ChatRoom } from '../chat-room/ChatRoomList';
 
 type Props = {
   data: ChatRoom;
   onPress: () => void;
+  backgroundColor?: string;
 };
-export const ChatRoomCard: React.FC<Props> = ({ data, onPress }) => {
+export const MapRoomCard: React.FC<Props> = ({ data, onPress, backgroundColor }) => {
   return (
     <DataContainer onPress={onPress}>
-      <Card>
+      <Card style={{ backgroundColor: backgroundColor ? backgroundColor : 'white' }}>
         <TempCircle>
-          <CircleText>NO.{data.id}</CircleText>
           <CircleText>{data.gender}</CircleText>
         </TempCircle>
         <CardContainer>
           <CardHeaderContainer>
             <LeftContainer>
-              <Title>{data.title}</Title>
-            </LeftContainer>
-            <RightContainer>
-              <Count>
-                {data.currentCount}/{data.maxCount}
-              </Count>
               <Time>{data.time}</Time>
-            </RightContainer>
+              <TitleView>
+              <Title>{data.title}</Title>
+              <TitleVip>VIP</TitleVip>
+              </TitleView>
+            </LeftContainer>
           </CardHeaderContainer>
           <CardBodyContainer>
             <TextContainer>
-              <Text>{data.startLocation}</Text>
-              <Text>{data.arriveLocation}</Text>
+              <Text>출발지 - {data.startLocation}</Text>
+              <Text>도착지 - {data.arriveLocation}</Text>
             </TextContainer>
-            {data.unreadMessage ? 
-              <MessageBadge>
-                <BadgeText>{data.unreadMessage}</BadgeText>
-              </MessageBadge>
-              : null }
+            <RightContainer>
+              <Count>
+                {data.currentCount}명/{data.maxCount}명
+              </Count>
+            </RightContainer>
           </CardBodyContainer>
         </CardContainer>
       </Card>
-      <Line />
     </DataContainer>
   );
 };
@@ -49,27 +46,21 @@ const DataContainer = styled.TouchableOpacity``;
 
 const Card = styled.View`
   flex-direction: row;
-  background-color: #ffffff;
-  padding-top: 24px;
-  padding-left: 16px;
-  padding-right: 16px;
-  padding-bottom: 24px;
-`;
-
-const Line = styled.View`
-  width: 100%;
-  height: 0;
-  border: solid 1px #e5e5e8;
+  padding: 8px 8px 14px 9px;
+  margin: 0 8px 18px 9px;
+  border-radius: 19px;
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16);
 `;
 
 const TempCircle = styled.View`
   width: 64px;
   height: 64px;
-  border-radius: 31px;
+  border-radius: 17px;
   background-color: #ff6464;
   justify-content: center;
   box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16);
   margin-right: 16px;
+  margin-top: 20px;
 `;
 
 const CircleText = styled.Text`
@@ -88,30 +79,49 @@ const CardHeaderContainer = styled.View`
 `;
 
 const LeftContainer = styled.View`
-  flex-direction: row;
-  justify-content: space-between;
+  margin-top:3px;
 `;
 
+const TitleView = styled.View`
+  flex: 1;
+  flex-direction: row;
+  margin-top:3px;
+`;
 const Title = styled.Text`
-  font-size: 15px;
+  font-size: 13px;
   font-weight: bold;
+  `;
+const TitleVip = styled.Text`
+  font-size: 9px;
+  font-weight: bold;
+  background-color: #fff780;
+  height: 18px;
+  padding: 2px 7px 2px 7px;
+  margin-left: 17px;
+  text-align: center;
+  border-radius: 25px;
 `;
 
 const RightContainer = styled.View`
-  flex-direction: row;
-  justify-content: space-between;
+
 `;
 
 const Count = styled.Text`
-  color: #b7b7bb;
-  font-size: 15px;
+  color: #343434;
+  font-size: 11px;
   font-weight: bold;
+  opacity: 0.59;
 `;
 
 const Time = styled.Text`
-  font-size: 13px;
-  font-weight: 300;
-  margin-left: 16px;
+  font-size: 8px;
+  width: 60px;
+  font-weight: bold;
+  padding: 3px 8px 3px 8px;
+  border-radius: 7px;
+  border: solid 1px #707070;
+  background-color: #ffffff;
+  text-align:center;
 `;
 
 const CardBodyContainer = styled.View`
@@ -119,7 +129,9 @@ const CardBodyContainer = styled.View`
   justify-content: space-between;
 `;
 
-const TextContainer = styled.View``;
+const TextContainer = styled.View`
+margin-bottom:0px;
+`;
 
 const MessageBadge = styled.View`
   border-radius: 14px;

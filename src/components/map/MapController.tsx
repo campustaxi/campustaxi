@@ -33,10 +33,10 @@ export const MapController: React.FC<Props> = ({
           clearButtonMode={"always"}
           underlineColorAndroid="transparent"
           placeholder="출발지를 입력해주세요." 
-        />
+          />
       </View>
       <View style={{ height: 40, flexDirection: 'row', marginHorizontal: 5, paddingHorizontal: 5, paddingVertical: 0, backgroundColor: 'rgba(112,112,112,0.12)', borderRadius: 6, alignItems: 'center'}}>
-        <Text>(검색)</Text>
+          <Search/>
         <TextInput
           value={end}
           onChangeText={text => setEnd(text)}
@@ -48,11 +48,4 @@ export const MapController: React.FC<Props> = ({
       </View>
   );
 };
-// const NaverMapView = styled.NaverMapView<{ flex?: number; centered?: boolean }>`
-//   flex: ${({ flex }) => flex};
-//   padding: 8px;
-//   border: 2px solid rgba(149, 149, 149, 0.09);
-//   border-radius: 8px;
-//   margin-bottom: 12px;
-//   text-align: ${({ centered }) => centered && 'center'};
-// `;
+
