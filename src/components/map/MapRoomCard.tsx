@@ -7,13 +7,16 @@ type Props = {
   data: ChatRoom;
   onPress: () => void;
   backgroundColor?: string;
+  gender?: string;
 };
-export const MapRoomCard: React.FC<Props> = ({ data, onPress, backgroundColor }) => {
+export const MapRoomCard: React.FC<Props> = ({ data, onPress, backgroundColor, gender }) => {
+  const bgColor = ((gender == 'man') ? '#579FEE' : ((gender == 'woman') ? '#FF6464' : '#000000'));
+  const genderText = ((gender == 'man') ? '남자' : ((gender == 'woman') ? '여자' : '무관'));
   return (
     <DataContainer onPress={onPress}>
       <Card style={{ backgroundColor: backgroundColor ? backgroundColor : 'white' }}>
-        <TempCircle>
-          <CircleText>{data.gender}</CircleText>
+        <TempCircle style={{ backgroundColor: bgColor}}>
+          <CircleText>{genderText}</CircleText>
         </TempCircle>
         <CardContainer>
           <CardHeaderContainer>
@@ -27,8 +30,8 @@ export const MapRoomCard: React.FC<Props> = ({ data, onPress, backgroundColor })
           </CardHeaderContainer>
           <CardBodyContainer>
             <TextContainer>
-              <Text>출발지 - {data.startLocation}</Text>
-              <Text>도착지 - {data.arriveLocation}</Text>
+              <TextArea>출발지 - {data.startLocation}</TextArea>
+              <TextArea>도착지 - {data.arriveLocation}</TextArea>
             </TextContainer>
             <RightContainer>
               <Count>
@@ -42,11 +45,13 @@ export const MapRoomCard: React.FC<Props> = ({ data, onPress, backgroundColor })
   );
 };
 
-const DataContainer = styled.TouchableOpacity``;
+const DataContainer = styled.TouchableOpacity`
+  height: 115px;
+`;
 
 const Card = styled.View`
   flex-direction: row;
-  padding: 8px 8px 14px 9px;
+  padding: 8px 8px 8px 9px;
   margin: 0 8px 18px 9px;
   border-radius: 19px;
   box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16);
@@ -79,7 +84,7 @@ const CardHeaderContainer = styled.View`
 `;
 
 const LeftContainer = styled.View`
-  margin-top:3px;
+  margin-top:-1px;
 `;
 
 const TitleView = styled.View`
@@ -133,12 +138,7 @@ const TextContainer = styled.View`
 margin-bottom:0px;
 `;
 
-const MessageBadge = styled.View`
-  border-radius: 14px;
-  background-color: #f8843c;
-  padding: 8px 12px;
-`;
-
-const BadgeText = styled.Text`
-  color: white;
+const TextArea = styled.Text`
+  font-size: 11px;
+  margin-bottom: 3px;
 `;

@@ -12,7 +12,7 @@ type Props = {
 export const SimpleButton: React.FC<Props> = ({ children, onPress, icon, clicked }) => {
   return (
     <BlankButton
-      backgroundColor={clicked ? '#CBCED7' : '#172864'}
+      backgroundColor={clicked ? '#CBCED7' : '#76A2EB'}
       color="white"
       icon={icon}
       onPress={onPress}

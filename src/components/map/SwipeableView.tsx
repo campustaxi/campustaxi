@@ -33,14 +33,14 @@ export const SwipeableView: React.FC<Props> = ({
 	return (
 		<>
 		<View style={{ height:'76%', width: '100%', position: 'absolute', bottom: 0 }}>
-				<Modalize alwaysOpen={30} ref={modalizeRef}
+				<Modalize alwaysOpen={42} ref={modalizeRef}
 					overlayStyle={{ backgroundColor: 'rgba(0,0,0,0)' }}
 					handlePosition="inside"
 					handleStyle={{ backgroundColor: "#707070" }}
-					modalStyle={{ backgroundColor: 'rgba(255,250,240,0.9)', padding: 10, marginHorizontal: 5, paddingTop:30 }}
+					modalStyle={{ backgroundColor: 'rgba(255,250,240,0.9)', padding: 10, marginHorizontal: 5, paddingTop:42 }}
 				>
 					{datas.map((data) => (
-						<MapRoomCard key={data.id} data={data} onPress={onPress(data.id)} />
+						<MapRoomCard key={data.id} data={data} onPress={onPress(data.id)} gender={data.gender} />
 					))}
 				</Modalize>
 			</View>
