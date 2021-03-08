@@ -1,46 +1,67 @@
 import styled from '@emotion/native';
 import React, { Dispatch, SetStateAction } from 'react';
 import NaverMapView, { Circle, Marker, Path, Polyline, Polygon } from "react-native-nmap";
-import { Dimensions } from 'react-native';
+import { Dimensions, InteractionManager } from 'react-native';
 import { View } from 'react-native';
 const windowWidth = Dimensions.get('window').width;
 const windowHeight = Dimensions.get('window').height;
 
+export type ChatMapProps = {
+  id: number;
+  gender: string;
+  title: string;
+  currentCount: number;
+  maxCount: number;
+  time: string;
+  startLocation: string;
+  arriveLocation: string;
+  unreadMessage?: string;
+  start_lat: string;
+  start_lon: string;
+  end_lat: string;
+  end_lon: string;
+};
+
 type Props = {
   // setValue: Dispatch<SetStateAction<any>>;
-  list?: string;
+  datas: Array<ChatMapProps>;
   onTouch: () => void;
   onCameraChange: () => void;
   onMapClick: () => void;
 };
 
-// 임시 값
-const P0 = { latitude: 37.564362, longitude: 126.977011 };
-const P1 = { latitude: 37.565051, longitude: 126.978567 };
-const P2 = { latitude: 37.565383, longitude: 126.976292 };
 
 export const MapView: React.FC<Props> = ({
   // setValue,
-  list,
+  datas,
   onTouch,
   onCameraChange,
   onMapClick
 }) => {
   return (
     <>
-      <NaverMapView style={{ width: '100%', height: '100%'  }}
+      <NaverMapView style={{ width: '100%', height: '100%' }}
         showsMyLocationButton={true}
-        center={{ ...P0, zoom: 16 }}
-      onTouch={onTouch}
-      onCameraChange={onCameraChange}
-      onMapClick={onMapClick}>
-    <Marker coordinate={P0} onClick={() => console.log('onClick! p0')} />
-    <Marker coordinate={P1} pinColor="blue" onClick={() => console.log('onClick! p1')} />
-    <Marker coordinate={P2} pinColor="red" onClick={() => console.log('onClick! p2')} />
-    <Path coordinates={[P0, P1]} onClick={() => console.log('onClick! path')} width={10} />
+        center={{ latitude: 37.617592, longitude: 127.076038, zoom: 16 }}
+        onTouch={onTouch}
+        onCameraChange={onCameraChange}
+        onMapClick={onMapClick}>
+        {datas.map((data) => (
+          <Marker key={data.id}
+            coordinate={{ latitude: parseInt(data.start_lat), longitude: parseInt(data.start_lon) }}
+            pinColor="red"
+            onClick={() => console.log('onClick! p1')} />
+        ))}
+        {datas.map((data) => (
+          <Marker key={data.id}
+            coordinate={{ latitude: parseInt(data.end_lat), longitude: parseInt(data.end_lon) }}
+            pinColor="blue" onClick={() =>
+              console.log('onClick! p2')} />
+        ))}
+        {/* <Path coordinates={[P0, P1]} onClick={() => console.log('onClick! path')} width={10} />
     <Polyline coordinates={[P1, P2]} onClick={() => console.log('onClick! polyline')} />
     <Circle coordinate={P0} color={"rgba(255,0,0,0.3)"} radius={200} onClick={() => console.log('onClick! circle')} />
-    <Polygon coordinates={[P0, P1, P2]} color={`rgba(0, 0, 0, 0.5)`} onClick={() => console.log('onClick! polygon')} />
+    <Polygon coordinates={[P0, P1, P2]} color={`rgba(0, 0, 0, 0.5)`} onClick={() => console.log('onClick! polygon')} /> */}
       </NaverMapView>
     </>
   );

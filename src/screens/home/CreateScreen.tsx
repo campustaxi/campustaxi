@@ -16,45 +16,65 @@ const list = [{
 	currentCount: 1,
 	maxCount: 4,
 	time: '13:00 탑승',
-	startLocation: '경희대학교',
-	arriveLocation: '공릉역',
+	startLocation: '공릉역 2번출구',
+	arriveLocation: '삼육대학교 중앙도서관',
 	gender: 'all',
+	start_lat: '37.625311',
+	start_lon: '127.073278',
+	end_lat: '37.643111',
+	end_lon: '127.106535',
 }, {
 	id: 2,
 	title: '여방장',
 	currentCount: 1,
 	maxCount: 4,
 	time: '14:00 탑승',
-	startLocation: '경희대학교',
-	arriveLocation: '공릉역',
+	startLocation: '태릉입구역 2번출구',
+	arriveLocation: '삼육대학교 중앙도서관',
 	gender: 'woman',
+	start_lat: '37.618363',
+	start_lon: '127.075230',
+	end_lat: '37.643111',
+	end_lon: '127.106535',
 }, {
 	id: 3,
 	title: '남방장',
 	currentCount: 1,
 	maxCount: 4,
 	time: '14:02 탑승',
-	startLocation: '경희대학교',
-	arriveLocation: '태릉입구역',
+	startLocation: '태릉입구역 2번출구',
+	arriveLocation: '삼육대학교 중앙도서관',
 	gender: 'man',
+	start_lat: '37.618363',
+	start_lon: '127.075230',
+	end_lat: '37.643111',
+	end_lon: '127.106535',
 }, {
 	id: 4,
 	title: '여방장',
 	currentCount: 1,
 	maxCount: 4,
 	time: '14:05 탑승',
-	startLocation: '경희대학교',
-	arriveLocation: '공릉역',
+	startLocation: '태릉입구역 7번출구',
+	arriveLocation: '삼육대학교 중앙도서관',
 	gender: 'woman',
+	start_lat: '37.617592',
+	start_lon: '127.076038',
+	end_lat: '37.643111',
+	end_lon: '127.106535',
 }, {
 	id: 5,
 	title: '여방장',
 	currentCount: 1,
 	maxCount: 4,
 	time: '15:00 탑승',
-	startLocation: '경희대학교',
-	arriveLocation: '공릉역',
+	startLocation: '태릉입구역 7번출구',
+	arriveLocation: '삼육대학교 분수대',
 	gender: 'woman',
+	start_lat: '37.617592',
+	start_lon: '127.076038',
+	end_lat: '37.643536',
+	end_lon: '127.105768',
 }]
 
 export function CreateScreen() {
@@ -62,14 +82,15 @@ export function CreateScreen() {
 		<MapController />
 		<MapView onTouch={() => console.log("onTouch")}
 			onCameraChange={() => console.log("onCameraChange")}
-			onMapClick={() => console.log("onMapClick")} />
+			onMapClick={() => console.log("onMapClick")}
+			datas={list} />
 		<SwipeableView datas={list} onPress={(id) => { return () => console.log("press") }} />
 		<SelectedRoomView>
-			<MapRoomCard key={list[0].id} data={list[0]} backgroundColor={"rgba(233,235,255,0.8)"} onPress={() => { return () => console.log("CreateScreenpress"); }}/>
+			<MapRoomCard key={list[0].id} data={list[0]} backgroundColor={"rgba(233,235,255,0.8)"} onPress={() => { return () => console.log("CreateScreenpress"); }} />
 		</SelectedRoomView>
-		<SelectedBottomView/>
+		<SelectedBottomView />
 		<BottomButtonView>
-			<Button onPress={() => console.log("createroom")} color={"#76A2EB"}title="방 만들기"/>
+			<Button onPress={() => console.log("createroom")} color={"#76A2EB"} title="방 만들기" />
 		</BottomButtonView>
 	</>
 }
