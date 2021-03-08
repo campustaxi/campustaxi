@@ -20,8 +20,8 @@ type LoginScreenNavigation = StackNavigationProp<LoginStackParamList, 'LoginScre
 export const LoginScreen: React.FC = ({}) => {
   const { navigate } = useNavigation<LoginScreenNavigation>();
   const [isSimpleLogin, setIsSimpleLogin] = useState(false);
-  const [id, setId] = useState('');
-  const [password, setPassword] = useState('');
+  const [id, setId] = useState('admin');
+  const [password, setPassword] = useState('12');
   const { setLoggedIn } = useAuthContext();
 
   const login = async () => {

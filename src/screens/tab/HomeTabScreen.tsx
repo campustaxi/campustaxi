@@ -8,7 +8,7 @@ export const HomeTabScreen = () => {
   useEffect(() => {
     if (isFocused) {
       if (Platform.OS === 'android') {
-        StatusBar.setBackgroundColor('#0d3664');
+        StatusBar.setBackgroundColor('#76A2EB');
       }
       StatusBar.setBarStyle('light-content');
     }
