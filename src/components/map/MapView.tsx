@@ -40,7 +40,10 @@ export const MapView: React.FC<Props> = ({
 }) => {
   return (
     <>
-      <NaverMapView style={{ width: '100%', height: '100%' }}
+      <NaverMapView
+        minZoomLevel={10}
+        maxZoomLevel={18}
+        style={{ width: '100%', height: '100%' }}
         showsMyLocationButton={true}
         center={{ latitude: 37.617592, longitude: 127.076038, zoom: 16 }}
         onTouch={onTouch}
