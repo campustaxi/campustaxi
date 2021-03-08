@@ -1,6 +1,6 @@
 import styled from '@emotion/native';
 import React, { Dispatch, SetStateAction } from 'react';
-import NaverMapView, { Circle, Marker, Path, Polyline, Polygon } from "react-native-nmap";
+import NaverMapView, { Circle, Marker, Path, Polyline, Polygon, Coord } from "react-native-nmap";
 import { Dimensions, InteractionManager } from 'react-native';
 import { View } from 'react-native';
 const windowWidth = Dimensions.get('window').width;
@@ -61,6 +61,7 @@ export const MapView: React.FC<Props> = ({
             pinColor="blue" onClick={() =>
               console.log('onClick! p2')} />
         ))}
+        <MarkerGroup coord={{ latitude: parseInt(datas[0].start_lat), longitude: parseInt(datas[0].start_lon) }} />
         {/* <Path coordinates={[P0, P1]} onClick={() => console.log('onClick! path')} width={10} />
     <Polyline coordinates={[P1, P2]} onClick={() => console.log('onClick! polyline')} />
     <Circle coordinate={P0} color={"rgba(255,0,0,0.3)"} radius={200} onClick={() => console.log('onClick! circle')} />
@@ -70,6 +71,7 @@ export const MapView: React.FC<Props> = ({
   );
 };
 
+const MarkerGroup = (coord: any) => <><Circle coordinate={coord} radius={200} color="red"></Circle></>;
 // const NaverMapView = styled.NaverMapView<{ flex?: number; centered?: boolean }>`
 //   flex: ${({ flex }) => flex};
 //   padding: 8px;
