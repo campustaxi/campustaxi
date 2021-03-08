@@ -8,7 +8,7 @@ export const HomeIcon: React.FC<{ focused?: boolean }> = ({ focused }) => {
         <G id="그룹_1">
           <Path
             id="패스_5"
-            fill={focused ? '#FF9515' : '#707070'}
+            fill={focused ? '#76A2EB' : '#707070'}
             d="M20.475 21.469l-9.343-8.514a1.063 1.063 0 0 0-1.438 0L.35 21.469a1.068 1.068 0 0 0 .719 1.857h1.492v8.53a.612.612 0 0 0 .612.612h5.122a.612.612 0 0 0 .612-.612v-5.179h3.01v5.179a.612.612 0 0 0 .612.612h5.121a.612.612 0 0 0 .612-.612v-8.53h1.493a1.068 1.068 0 0 0 .719-1.857z"
             transform="translate(0 -12.675)"
           />
@@ -19,7 +19,7 @@ export const HomeIcon: React.FC<{ focused?: boolean }> = ({ focused }) => {
           <Path
             id="패스_6"
             d="M348.086 42.73h-4.113l4.725 4.3v-3.688a.612.612 0 0 0-.612-.612z"
-            fill={focused ? '#FF9515' : '#707070'}
+            fill={focused ? '#76A2EB' : '#707070'}
             transform="translate(-343.973 -42.73)"
           />
         </G>

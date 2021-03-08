@@ -10,7 +10,7 @@ export type ChatRoom = {
   time: string;
   startLocation: string;
   arriveLocation: string;
-  unreadMessage: string;
+  unreadMessage?: string;
 };
 
 export type Props = {

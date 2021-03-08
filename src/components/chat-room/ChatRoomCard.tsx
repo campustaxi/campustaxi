@@ -32,9 +32,11 @@ export const ChatRoomCard: React.FC<Props> = ({ data, onPress }) => {
               <Text>{data.startLocation}</Text>
               <Text>{data.arriveLocation}</Text>
             </TextContainer>
-            <MessageBadge>
-              <BadgeText>{data.unreadMessage}</BadgeText>
-            </MessageBadge>
+            {data.unreadMessage ? 
+              <MessageBadge>
+                <BadgeText>{data.unreadMessage}</BadgeText>
+              </MessageBadge>
+              : null }
           </CardBodyContainer>
         </CardContainer>
       </Card>
