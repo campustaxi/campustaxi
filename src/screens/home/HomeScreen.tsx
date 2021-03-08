@@ -37,9 +37,6 @@ export const HomeScreen: React.FC<Props> = () => {
 
           </MyCampusInfo>
 
-          <BannerContainer>
-            <TempImage />
-          </BannerContainer>
           <ScrollView>
             <MainContainer>
               <SubContainer>
