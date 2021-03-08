@@ -28,59 +28,59 @@ type Props = {
 export const HomeScreen: React.FC<Props> = () => {
   const { navigate } = useNavigation<HomeScreenNavigationProp>();
   return (
-    <BlankBackground color="#76A2EB">
-      <Container>
-        <LogoContainer>
-          <MainLogo fill="#fff" />
-        </LogoContainer>
-        <MyCampusInfo>
+      <BlankBackground color="#76A2EB">
+        <Container>
+          <LogoContainer>
+            <MainLogo fill="#fff" />
+          </LogoContainer>
+          <MyCampusInfo>
 
-        </MyCampusInfo>
+          </MyCampusInfo>
 
-        <BannerContainer>
-          <TempImage />
-        </BannerContainer>
-        <ScrollView>
-        <MainContainer>
-          <SubContainer>
-            <SubTitle>카테고리</SubTitle>
-            <CardContainer>
-              <Card>
-                <SchoolIcon />
-                <CardTitle>등교</CardTitle>
-              </Card>
-              <Card>
-                <BusIcon />
-                <CardTitle>하교</CardTitle>
-              </Card>
-              <Card>
-                <EtcIcon />
-                <CardTitle>기타</CardTitle>
-              </Card>
-            </CardContainer>
-          </SubContainer>
+          <BannerContainer>
+            <TempImage />
+          </BannerContainer>
+          <ScrollView>
+            <MainContainer>
+              <SubContainer>
+                <SubTitle>카테고리</SubTitle>
+                <CardContainer>
+                  <Card>
+                    <SchoolIcon />
+                    <CardTitle>등교</CardTitle>
+                  </Card>
+                  <Card>
+                    <BusIcon />
+                    <CardTitle>하교</CardTitle>
+                  </Card>
+                  <Card>
+                    <EtcIcon />
+                    <CardTitle>기타</CardTitle>
+                  </Card>
+                </CardContainer>
+              </SubContainer>
 
-          <SubContainer>
-            <SubTitle>인원</SubTitle>
-            <OptionButton options={["2", "3", "4"]}/>
-          </SubContainer>
+              <SubContainer>
+                <SubTitle>인원</SubTitle>
+                <OptionButton options={["2", "3", "4"]}/>
+              </SubContainer>
 
-          <SubContainer>
-            <SubTitle>탑승 성별</SubTitle>
-            <OptionButton options={["동성만", "무관"]}/>
-          </SubContainer>
+              <SubContainer>
+                <SubTitle>탑승 성별</SubTitle>
+                <OptionButton options={["동성만", "무관"]}/>
+              </SubContainer>
 
-          <SubContainer>
-            <SubTitle>검색</SubTitle>
-            <TextField placeholder={"출발지를 검색하세요"}/>
-            <TextField placeholder={"도착지를 검색하세요"}/>
-          </SubContainer>
+              <SubContainer>
+                <SubTitle>검색</SubTitle>
+                <TextField placeholder={"출발지를 검색하세요"}/>
+                <TextField placeholder={"도착지를 검색하세요"}/>
+              </SubContainer>
 
-          <Button onPress={() => navigate("CreateScreen")} color="#76A2EB" title="방 검색하기"/>
-        </MainContainer>
-        </ScrollView>
-      </Container>
-    </BlankBackground>
+              <Button onPress={() => navigate("CreateScreen")} color="#76A2EB" title="방 검색하기"/>
+            </MainContainer>
+          </ScrollView>
+        </Container>
+      </BlankBackground>
   );
 };
 
