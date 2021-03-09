@@ -1,8 +1,10 @@
 import styled from '@emotion/native';
 import { useNavigation } from '@react-navigation/native';
 import { StackNavigationProp } from '@react-navigation/stack';
-import React from 'react';
-import { Platform } from 'react-native';
+import axios from 'axios';
+import React, { useEffect, useState } from 'react';
+import { Dimensions, Platform } from 'react-native';
+import Carousel from 'react-native-snap-carousel';
 import { BookIcon } from '../../components/icon/home/BookIcon';
 import { BusIcon } from '../../components/icon/home/BusIcon';
 import { ClubIcon } from '../../components/icon/home/ClubIcon';
@@ -14,15 +16,41 @@ import { SchoolIcon } from '../../components/icon/home/SchoolIcon';
 import { SkiIcon } from '../../components/icon/home/SkiIcon';
 import { BlankBackground } from '../../components/layout/BlankBackground';
 import { MainLogo } from '../../components/logo/MainLogo';
+import { API_URL } from '../../constant';
+import { useAuthContext } from '../../contexts/AuthContext';
 import { HomeStackParamList } from '../tab/HomeStackNavigation';
 
 type HomeScreenNavigation = StackNavigationProp<HomeStackParamList, 'HomeScreen'>;
 
+type Banner = {
+  name: string;
+  image: string;
+  sort_order: number;
+  expiration_at: Date;
+};
 export const HomeScreen: React.FC = () => {
+  const [banner, setBanner] = useState<Banner[]>([]);
   const { navigate } = useNavigation<HomeScreenNavigation>();
-
+  const { token } = useAuthContext();
   const handleClick = (category: string) => () =>
     navigate('CategoryChatListScreen', { categoryName: category });
+
+  useEffect(() => {
+    if (token) {
+      axios
+        .get(`${API_URL}/api/v1/banner/`, {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        })
+        .then((response) => {
+          if (response.data.results) {
+            setBanner(response.data.results);
+            console.log(response.data.results);
+          }
+        });
+    }
+  }, [token]);
 
   return (
     <BlankBackground color="#0d3664">
@@ -31,7 +59,16 @@ export const HomeScreen: React.FC = () => {
           <MainLogo fill="#fff" />
         </LogoContainer>
         <BannerContainer>
-          <TempImage />
+          <CarouselContainer>
+            <Carousel
+              sliderWidth={Dimensions.get('window').width}
+              itemWidth={Dimensions.get('window').width}
+              data={banner}
+              renderItem={({ item }: { item: Banner }) => (
+                <Banner source={{ uri: item.image ?? '' }} />
+              )}
+            />
+          </CarouselContainer>
         </BannerContainer>
         <MainContainer>
           <CardContainer>
@@ -103,8 +140,6 @@ const MainContainer = styled.View`
 const BannerContainer = styled.View`
   height: 110px;
   background-color: #fff;
-  padding-left: 16px;
-  padding-right: 16px;
   margin-top: 124px;
 `;
 
@@ -129,8 +164,14 @@ const CardTitle = styled.Text`
   margin-top: 16px;
 `;
 
-const TempImage = styled.View`
+const CarouselContainer = styled.View`
   margin-top: -24px;
   height: 110px;
-  background-color: red;
+  flex: 1;
+`;
+
+const Banner = styled.Image`
+  height: 110px;
+  margin-left: 24px;
+  margin-right: 24px;
 `;

@@ -1,8 +1,10 @@
 import styled from '@emotion/native';
 import { StackNavigationProp } from '@react-navigation/stack';
-import React from 'react';
+import axios from 'axios';
+import React, { useEffect, useState } from 'react';
 import { ScrollView } from 'react-native-gesture-handler';
 import { NotificationMessageIcon } from '../../components/icon/notification/NotificationMessageIcon';
+import { API_URL } from '../../constant';
 import { NotificationStackParamList } from './NotificationNavigation';
 
 type NotificationScreenNavigationProp = StackNavigationProp<
@@ -14,31 +16,22 @@ type Props = {
   navigation: NotificationScreenNavigationProp;
 };
 
-const datas = [
-  {
-    id: 1,
-    title: '새로운 메세지',
-    description: '‘하드스틱’님께서 메세지를 보냈습니다.',
-    type: 'message',
-    time: '오후 12:22',
-  },
-  {
-    id: 2,
-    title: '친구초대 이벤트',
-    description: '친구초대해서 5000원 득템하자!]\n개이득 택시!',
-    type: 'message',
-    time: '오후 12:22',
-  },
-  {
-    id: 3,
-    title: '새로운 메세지',
-    description: '‘하드스틱’님께서 메세지를 보냈습니다.',
-    type: 'message',
-    time: '오후 12:22',
-  },
-];
-
+type Data = {
+  id: number;
+  title: string;
+  time: string;
+  description: string;
+};
 export const NotificationScreen: React.FC<Props> = () => {
+  const [datas, setData] = useState<Data[]>([]);
+
+  useEffect(() => {
+    axios.get(`${API_URL}/api/v1/notifications/`).then((response) => {
+      if (response.data.results) {
+        setData(response.data.results);
+      }
+    });
+  }, []);
   return (
     <Container>
       <ScrollView>
