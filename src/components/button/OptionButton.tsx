@@ -1,6 +1,6 @@
 import styled from '@emotion/native';
 import React, { useState, useEffect, ReactNode } from 'react';
-import { BlankButton } from './BlankButton';
+import { ToggleButton } from './ToggleButton';
 
 type Props = {
     options: string[];
@@ -8,26 +8,31 @@ type Props = {
     color?: string;
     backgroundColor?: string;
     clicked?: boolean;
+    height?: number;
+    width?: number;
 };
 
-export const OptionButton: React.FC<Props> = ({ children, options, icon, clicked }) => {
+export const OptionButton: React.FC<Props> = ({ children, options, icon, clicked, height, width }) => {
 
     const [activeoption, setActiveoption] = useState(options[0]);
 
     return (
         <OptionButtonContainer>
             {options.map((option, index) => (
-                <BlankButton
-                    backgroundColor={activeoption === option ? '#000000' : '#B7B7BB'}
-                    borderWidth={2}
+                <ToggleButton
+                    backgroundColor={activeoption === option ? '#76A2EB' :  '#B7B7BB'}
+                    borderWidth={1.5}
+                    borderColor={activeoption === option ? '#76A2EB' :  '#B7B7BB'}
                     color="white"
+                    height={height}
+                    width={width}
                     icon={icon}
                     onPress={()=>{
                         setActiveoption(option);
                     }}
-                    borderRadius={36}>
-                    {options[index]}
-                </BlankButton>
+                    borderRadius={25}>
+                    <ButtonText>{options[index]}</ButtonText>
+                </ToggleButton>
             ))}
         </OptionButtonContainer>
     );
@@ -36,4 +41,9 @@ export const OptionButton: React.FC<Props> = ({ children, options, icon, clicked
 const OptionButtonContainer = styled.View`
   justify-content: center;
   flex-direction: row;
+`;
+
+const ButtonText = styled.Text`
+  color: #FFFFFF;
+  font-size: 11px;
 `;

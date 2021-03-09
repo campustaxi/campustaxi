@@ -46,8 +46,11 @@ export const TextField: React.FC<Props> = ({
 const Box = styled.TextInput<{ flex?: number; centered?: boolean; marginBottom?: number; padding?: number; border?: string;}>`
   flex: ${({ flex }) => flex};
   padding: ${({ padding }) => padding ? padding : '8px' };
-  border: ${({ border }) => border ? border : '2px solid rgba(149, 149, 149, 0.09)' };
-  border-radius: 8px;
+  border: ${({ border }) => border ? border : '1px solid #B7B7BB' };
+  border-radius: 21px;
+  background-color: #FFFFFF;
   margin-bottom: ${({ marginBottom }) => marginBottom ? marginBottom : '12px' };
   text-align: ${({ centered }) => centered && 'center'};
+  height: 33px;
+  width: 243px;
 `;

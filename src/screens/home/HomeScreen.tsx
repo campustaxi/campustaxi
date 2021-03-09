@@ -2,7 +2,7 @@ import styled from '@emotion/native';
 import { StackNavigationProp } from '@react-navigation/stack';
 import { useNavigation } from '@react-navigation/native';
 import React from 'react';
-import { Platform, Button, ScrollView } from 'react-native';
+import { Platform, Button, ScrollView, Text, TouchableOpacity } from 'react-native';
 import { OptionButton } from '../../components/button/OptionButton';
 import { TextField } from '../../components/form/TextField';
 import { BookIcon } from '../../components/icon/home/BookIcon';
@@ -14,6 +14,7 @@ import { PoolIcon } from '../../components/icon/home/PoolIcon';
 import { RideIcon } from '../../components/icon/home/RideIcon';
 import { EtcIcon } from '../../components/icon/home/EtcIcon';
 import { SchoolIcon } from '../../components/icon/home/SchoolIcon';
+import { Search } from '../../components/icon/home/Search';
 import { SkiIcon } from '../../components/icon/home/SkiIcon';
 import { BlankBackground } from '../../components/layout/BlankBackground';
 import { MainLogo } from '../../components/logo/MainLogo';
@@ -32,15 +33,30 @@ export const HomeScreen: React.FC<Props> = () => {
         <Container>
           <LogoContainer>
             <MainLogo fill="#fff" />
-          </LogoContainer>
-          <MyCampusInfo>
+            <MyCampusInfo>
+              <UserCampusInfo>택시 대학교 [서울]</UserCampusInfo>
+            </MyCampusInfo>
 
-          </MyCampusInfo>
+            <MiniIconContainer>
+              <MiniIconTouchable>
+
+                <Text style={{color : 'white'}}>학교 홈</Text>
+              </MiniIconTouchable>
+              <MiniIconTouchable>
+
+                <Text style={{color : 'white'}}>E-Class</Text>
+              </MiniIconTouchable>
+            </MiniIconContainer>
+
+
+          </LogoContainer>
 
           <ScrollView>
             <MainContainer>
               <SubContainer>
-                <SubTitle>카테고리</SubTitle>
+                <SubTitleView>
+                  <SubTitle>카테고리</SubTitle>
+                </SubTitleView>
                 <CardContainer>
                   <Card>
                     <SchoolIcon />
@@ -58,19 +74,31 @@ export const HomeScreen: React.FC<Props> = () => {
               </SubContainer>
 
               <SubContainer>
-                <SubTitle>인원</SubTitle>
-                <OptionButton options={["2", "3", "4"]}/>
+                <SubTitleView>
+                  <SubTitle>인원</SubTitle>
+                </SubTitleView>
+                <OptionButton options={["2", "3", "4"]} height={21} width={21}/>
               </SubContainer>
 
               <SubContainer>
-                <SubTitle>탑승 성별</SubTitle>
-                <OptionButton options={["동성만", "무관"]}/>
+                <SubTitleView>
+                  <SubTitle>탑승 성별</SubTitle>
+                </SubTitleView>
+                <OptionButton options={["동성만", "무관"]} height={28} width={58}/>
               </SubContainer>
 
               <SubContainer>
-                <SubTitle>검색</SubTitle>
-                <TextField placeholder={"출발지를 검색하세요"}/>
-                <TextField placeholder={"도착지를 검색하세요"}/>
+                <SubTitleView>
+                  <SubTitle>검색</SubTitle>
+                </SubTitleView>
+                <SearchView>
+                  <TextField placeholder={"출발지점을 입력해주세요"} centered={true}/>
+                  <TouchableOpacity><Search/></TouchableOpacity>
+                </SearchView>
+                <SearchView>
+                  <TextField placeholder={"도착지점을 입력해주세요"} centered={true}/>
+                  <TouchableOpacity><Search/></TouchableOpacity>
+                </SearchView>
               </SubContainer>
 
               <Button onPress={() => navigate("CreateScreen")} color="#76A2EB" title="방 검색하기"/>
@@ -100,6 +128,13 @@ const MainContainer = styled.View`
   padding-bottom: 100px;
 `;
 
+const SearchView = styled.View`
+  flex: 1;
+  flex-direction: row;
+  align-items: center;
+`;
+
+
 const BannerContainer = styled.View`
   height: 110px;
   background-color: #F2F2F2;
@@ -120,6 +155,8 @@ const CardContainer = styled.View`
 
 const Card = styled.TouchableOpacity`
   ${Platform.OS === 'android' && 'elevation: 6;'}
+  height: 101px;
+  width: 102px;
   flex: 1;
   background-color: #ffffff;
   justify-content: center;
@@ -134,14 +171,44 @@ const CardTitle = styled.Text`
   margin-top: 16px;
 `;
 
-const SubTitle = styled.Text`
+const MiniIconContainer = styled.View`
+  flex-direction: row;
+  margin-top: 10;
+`;
+
+const MiniIconTouchable = styled.TouchableOpacity`
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin-right: 5;
+  margin-left: 5;
+`;
+
+const SubTitleView = styled.View`
   flex: 1;
   height: 21px;
   width: 88px;
   color: #5F88CD;
-  text-align: center;
+  justify-content: center;
+  align-items: center;
+  border-width: 1.5px;
+  border-color: #76A2EB;
   border-radius: 6px;
   background-color: white;
+  font-size: 11px;
+  margin-top: 25px;
+  margin-bottom: 15px;
+`;
+
+const SubTitle = styled.Text`
+  color: #5F88CD;
+  text-align: center;
+  font-size: 11px;
+`;
+
+const UserCampusInfo = styled.Text`
+  color: #F4F4F4;
+  text-align: center;
   font-size: 11px;
 `;
 
