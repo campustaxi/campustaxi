@@ -2,7 +2,7 @@ import styled from '@emotion/native';
 import { StackNavigationProp } from '@react-navigation/stack';
 import { useNavigation } from '@react-navigation/native';
 import React from 'react';
-import { Platform, Button, ScrollView, Text, TouchableOpacity } from 'react-native';
+import { Platform, Button, ScrollView, Text, TouchableOpacity, View, Image } from 'react-native';
 import { OptionButton } from '../../components/button/OptionButton';
 import { CardButton } from '../../components/button/CardButton';
 import { TextField } from '../../components/form/TextField';
@@ -23,6 +23,8 @@ import { MiniHomeIcon } from '../../components/icon/home/MiniHomeIcon';
 import { MiniEIcon } from '../../components/icon/home/MiniEIcon';
 import { Search } from '../../components/icon/home/Search';
 import { SkiIcon } from '../../components/icon/home/SkiIcon';
+import { CreateRoomIcon } from '../../components/icon/home/CreateRoomIcon';
+import { AlarmBellIcon } from '../../components/icon/home/AlarmBellIcon';
 import { BlankBackground } from '../../components/layout/BlankBackground';
 import { MainLogo } from '../../components/logo/MainLogo';
 import { HomeStackParamList } from './HomeNavigation';
@@ -38,6 +40,10 @@ export const HomeScreen: React.FC<Props> = () => {
   return (
       <BlankBackground color="#76A2EB">
         <Container>
+
+          <AlarmBell>
+            <AlarmBellIcon/>
+          </AlarmBell>
           <LogoContainer>
             <MainLogo fill="#fff" />
             <MyCampusInfo>
@@ -67,21 +73,6 @@ export const HomeScreen: React.FC<Props> = () => {
 
                 <CardButton options={["등교", "하교", "기타"]} icon={[<SchoolIcon/>,<BusIcon/>,<EtcIcon/>]}/>
 
-
-                {/*<CardContainer>*/}
-                {/*  <Card>*/}
-                {/*    <SchoolIcon />*/}
-                {/*    <CardTitle>등교</CardTitle>*/}
-                {/*  </Card>*/}
-                {/*  <Card>*/}
-                {/*    <BusIcon />*/}
-                {/*    <CardTitle>하교</CardTitle>*/}
-                {/*  </Card>*/}
-                {/*  <Card>*/}
-                {/*    <EtcIcon />*/}
-                {/*    <CardTitle>기타</CardTitle>*/}
-                {/*  </Card>*/}
-                {/*</CardContainer>*/}
               </SubContainer>
 
 
@@ -104,19 +95,17 @@ export const HomeScreen: React.FC<Props> = () => {
                   <SubTitle>검색</SubTitle>
                 </SubTitleView>
 
-
                 <SearchView>
                   <DepartIcon/>
-                  <HomeLocationTextField placeholder={"출발지점을 입력해주세요"} centered={true}/>
-                  <TouchableOpacity><Search/></TouchableOpacity>
+                  <HomeLocationTextField placeholder={"출발지를 검색하세요"} centered={true}/>
                 </SearchView>
                 <SearchView>
                   <DotlineIcon/>
+                  <View style={{width: 263}}/>
                 </SearchView>
                 <SearchView>
                   <ArriveIcon/>
-                  <HomeLocationTextField placeholder={"도착지점을 입력해주세요"} centered={true}/>
-                  <TouchableOpacity><Search/></TouchableOpacity>
+                  <HomeLocationTextField placeholder={"도착지를 검색하세요"} centered={true}/>
                 </SearchView>
               </SubContainer>
 
@@ -127,6 +116,14 @@ export const HomeScreen: React.FC<Props> = () => {
               </SubContainer>
             </MainContainer>
           </ScrollView>
+
+          <CreateRoom>
+            <CreateRoomIcon/>
+            <CreateRoomText>
+              방만들기
+            </CreateRoomText>
+          </CreateRoom>
+
         </Container>
       </BlankBackground>
   );
@@ -134,7 +131,7 @@ export const HomeScreen: React.FC<Props> = () => {
 
 const Container = styled.SafeAreaView`
   flex: 1;
-  padding-top: ${Platform.OS === 'android' && '45px'};
+  padding-top: ${Platform.OS === 'android' && '30px'};
 `;
 
 const LogoContainer = styled.View`
@@ -196,21 +193,22 @@ const CardTitle = styled.Text`
 
 const MiniIconText = styled.Text`
   color: white;
-  margin-top: -5px;
+  margin-top: -7px;
+  font-size: 9px;
 `;
-
 
 const MiniIconContainer = styled.View`
   flex-direction: row;
-  margin-top: 10;
+  margin-top: 10px;
+  margin-bottom: 10px;
 `;
 
 const MiniIconTouchable = styled.TouchableOpacity`
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  margin-right: 5;
-  margin-left: 5;
+  margin-right: 5px;
+  margin-left: 5px;
 `;
 
 const SubTitleView = styled.View`
@@ -256,10 +254,10 @@ const MyCampusInfo = styled.View`
   background-color: rgba(255, 255, 255, 0.13);
   border-width: 1px;
   border-color: rgba(255, 255, 255, 0.83);
-  border-top-left-radius: 108;
-  border-top-right-radius: 108;
-  border-bottom-left-radius: 108;
-  border-bottom-right-radius: 108;
+  border-top-left-radius: 108px;
+  border-top-right-radius: 108px;
+  border-bottom-left-radius: 108px;
+  border-bottom-right-radius: 108px;
 `;
 
 const SearchRoom = styled.TouchableOpacity`
@@ -279,3 +277,29 @@ const SearchRoomText = styled.Text`
   font-size: 12px;
 `;
 
+const CreateRoom = styled.TouchableOpacity`
+  width: 69px;
+  height: 69px;
+  background-color: #76A2EB;
+  align-items: center;
+  justify-content: center;
+  border-radius: 100px;
+  position: absolute;
+  bottom: 20px;
+  right: 15px;
+  shadow-color: #d9d9d9;
+`;
+
+const CreateRoomText = styled.Text`
+  color: white;
+  font-size: 10px;
+  margin-top: 4px;
+`;
+
+
+const AlarmBell = styled.TouchableOpacity`
+  position: absolute;
+  top: 30px;
+  right: 15px;
+  z-index : 1
+`;

@@ -18,10 +18,10 @@ export const CardButton: React.FC<Props> = ({ children, options, icon, clicked, 
         <OptionButtonContainer>
             {options.map((option, index) => (
                 <ToggleButton
-                    backgroundColor={activeoption === option ? 'rgba(247, 255, 0, 0.13)' :  '#FFFFFF'}
+                    backgroundColor={activeoption === option ? '#FFFFFF' :  'rgba(255, 255, 255, 0.7)'}
                     boxShadow = '0 3px 6px rgba(0, 0, 0, 0.16)'
                     borderWidth={1.5}
-                    borderColor={activeoption === option ? 'rgba(247, 255, 0, 0.13)' :  '#FFFFFF'}
+                    borderColor={activeoption === option ? '#707070' :  'rgba(255, 255, 255, 0.7)'}
                     icon={icon[index]}
                     height={101}
                     width={103}

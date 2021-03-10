@@ -20,9 +20,9 @@ export const OptionButton: React.FC<Props> = ({ children, options, icon, clicked
         <OptionButtonContainer>
             {options.map((option, index) => (
                 <ToggleButton
-                    backgroundColor={activeoption === option ? '#76A2EB' :  '#B7B7BB'}
+                    backgroundColor={activeoption === option ? '#FFFFFF' :  'rgba(255, 255, 255, 0)'}
                     borderWidth={1.5}
-                    borderColor={activeoption === option ? '#76A2EB' :  '#B7B7BB'}
+                    borderColor={activeoption === option ? '#000000' :  '#B7B7BB'}
                     color="white"
                     height={height}
                     width={width}
@@ -31,7 +31,12 @@ export const OptionButton: React.FC<Props> = ({ children, options, icon, clicked
                         setActiveoption(option);
                     }}
                     borderRadius={25}>
-                    <ButtonText>{options[index]}</ButtonText>
+                    <ButtonText
+                        color={activeoption === option ? '#000000' :  '#B7B7BB'}
+                        fontSize={11}
+                    >
+                        {options[index]}
+                    </ButtonText>
                 </ToggleButton>
             ))}
         </OptionButtonContainer>
@@ -44,6 +49,6 @@ const OptionButtonContainer = styled.View`
 `;
 
 const ButtonText = styled.Text`
-  color: #FFFFFF;
+  color: ${({ color }) => color};
   font-size: 11px;
 `;

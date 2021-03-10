@@ -1,6 +1,10 @@
 import styled from '@emotion/native';
 import React, { Dispatch, SetStateAction } from 'react';
-import { KeyboardTypeOptions } from 'react-native';
+import { KeyboardTypeOptions, TouchableOpacity } from 'react-native';
+import { Search } from '../../components/icon/home/Search';
+import { TextFieldCancleIcon } from '../../components/icon/home/TextFieldCancleIcon';
+
+
 
 type Props = {
     value: any;
@@ -30,11 +34,28 @@ export const HomeLocationTextField: React.FC<Props> = ({
             placeholderTextColor="#b0b0b2"
             keyboardType={keyboardType}
             centered={centered}
-        />
+        >
+            <TouchableOpacity>
+                <Search/>
+            </TouchableOpacity>
+            <LocationInput
+                flex={flex}
+                value={value}
+                onChangeText={setValue}
+                maxLength={maxLength}
+                placeholder={placeholder}
+                placeholderTextColor="#808083"
+                keyboardType={keyboardType}
+                centered={centered}
+            />
+            <TouchableOpacity>
+                <TextFieldCancleIcon height= {Platform.OS === 'android' ? 13 : 0} width= {Platform.OS === 'android' ? 13 : 0}/>
+            </TouchableOpacity>
+        </Box>
     );
 };
 
-const Box = styled.TextInput<{ flex?: number; centered?: boolean }>`
+const Box = styled.View<{ flex?: number; centered?: boolean }>`
   height: 33px;
   width: 243px;
   margin-left: 10px;
@@ -44,5 +65,16 @@ const Box = styled.TextInput<{ flex?: number; centered?: boolean }>`
   font-size: 11px;
   color: #B7B7BB;
   background-color: #FFFFFF;
-  text-align: ${({ centered }) => centered && 'center'};
+  flex-direction: row;
+  align-items: center;
+  padding-right: 10px;
+  padding-left: 10px;
+`;
+
+const LocationInput = styled.TextInput<{ flex?: number; centered?: boolean }>`
+  height: 33px;
+  width: 190px;
+  font-size: 11px;
+  color: #080808;
+  placeholder-text-color="#808083"
 `;

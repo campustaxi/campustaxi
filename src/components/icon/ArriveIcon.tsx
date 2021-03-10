@@ -10,9 +10,8 @@ export function ArriveIcon() {
             viewBox="0 0 17 26"
         >
             <G
-                fill="#ff2727"
+                fill="#FD6A6A"
                 data-name="그룹 256"
-                opacity="0.68"
                 transform="translate(-188 -191.334)"
             >
                 <Path
