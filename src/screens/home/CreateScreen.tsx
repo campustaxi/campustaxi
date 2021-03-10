@@ -12,7 +12,7 @@ import { HomeTabParamList } from '../tab/HomeTabNavigation'
 
 const list = [{
 	id: 1,
-	title: '남여공동방장ㅁㅁㅁ',
+	title: '남여공동방장',
 	currentCount: 1,
 	maxCount: 4,
 	time: '13:00 탑승',

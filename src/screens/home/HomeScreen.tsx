@@ -4,7 +4,12 @@ import { useNavigation } from '@react-navigation/native';
 import React from 'react';
 import { Platform, Button, ScrollView, Text, TouchableOpacity } from 'react-native';
 import { OptionButton } from '../../components/button/OptionButton';
+import { CardButton } from '../../components/button/CardButton';
 import { TextField } from '../../components/form/TextField';
+import { HomeLocationTextField } from '../../components/form/HomeLocationTextField';
+import { ArriveIcon } from '../../components/icon/ArriveIcon';
+import { DepartIcon } from '../../components/icon/DepartIcon';
+import { DotlineIcon } from '../../components/icon/DotlineIcon';
 import { BookIcon } from '../../components/icon/home/BookIcon';
 import { BusIcon } from '../../components/icon/home/BusIcon';
 import { ClubIcon } from '../../components/icon/home/ClubIcon';
@@ -14,6 +19,8 @@ import { PoolIcon } from '../../components/icon/home/PoolIcon';
 import { RideIcon } from '../../components/icon/home/RideIcon';
 import { EtcIcon } from '../../components/icon/home/EtcIcon';
 import { SchoolIcon } from '../../components/icon/home/SchoolIcon';
+import { MiniHomeIcon } from '../../components/icon/home/MiniHomeIcon';
+import { MiniEIcon } from '../../components/icon/home/MiniEIcon';
 import { Search } from '../../components/icon/home/Search';
 import { SkiIcon } from '../../components/icon/home/SkiIcon';
 import { BlankBackground } from '../../components/layout/BlankBackground';
@@ -39,12 +46,12 @@ export const HomeScreen: React.FC<Props> = () => {
 
             <MiniIconContainer>
               <MiniIconTouchable>
-
-                <Text style={{color : 'white'}}>학교 홈</Text>
+                <MiniHomeIcon/>
+                <MiniIconText>학교 홈</MiniIconText>
               </MiniIconTouchable>
               <MiniIconTouchable>
-
-                <Text style={{color : 'white'}}>E-Class</Text>
+                <MiniEIcon/>
+                <MiniIconText>E-Class</MiniIconText>
               </MiniIconTouchable>
             </MiniIconContainer>
 
@@ -57,21 +64,26 @@ export const HomeScreen: React.FC<Props> = () => {
                 <SubTitleView>
                   <SubTitle>카테고리</SubTitle>
                 </SubTitleView>
-                <CardContainer>
-                  <Card>
-                    <SchoolIcon />
-                    <CardTitle>등교</CardTitle>
-                  </Card>
-                  <Card>
-                    <BusIcon />
-                    <CardTitle>하교</CardTitle>
-                  </Card>
-                  <Card>
-                    <EtcIcon />
-                    <CardTitle>기타</CardTitle>
-                  </Card>
-                </CardContainer>
+
+                <CardButton options={["등교", "하교", "기타"]} icon={[<SchoolIcon/>,<BusIcon/>,<EtcIcon/>]}/>
+
+
+                {/*<CardContainer>*/}
+                {/*  <Card>*/}
+                {/*    <SchoolIcon />*/}
+                {/*    <CardTitle>등교</CardTitle>*/}
+                {/*  </Card>*/}
+                {/*  <Card>*/}
+                {/*    <BusIcon />*/}
+                {/*    <CardTitle>하교</CardTitle>*/}
+                {/*  </Card>*/}
+                {/*  <Card>*/}
+                {/*    <EtcIcon />*/}
+                {/*    <CardTitle>기타</CardTitle>*/}
+                {/*  </Card>*/}
+                {/*</CardContainer>*/}
               </SubContainer>
+
 
               <SubContainer>
                 <SubTitleView>
@@ -91,17 +103,28 @@ export const HomeScreen: React.FC<Props> = () => {
                 <SubTitleView>
                   <SubTitle>검색</SubTitle>
                 </SubTitleView>
+
+
                 <SearchView>
-                  <TextField placeholder={"출발지점을 입력해주세요"} centered={true}/>
+                  <DepartIcon/>
+                  <HomeLocationTextField placeholder={"출발지점을 입력해주세요"} centered={true}/>
                   <TouchableOpacity><Search/></TouchableOpacity>
                 </SearchView>
                 <SearchView>
-                  <TextField placeholder={"도착지점을 입력해주세요"} centered={true}/>
+                  <DotlineIcon/>
+                </SearchView>
+                <SearchView>
+                  <ArriveIcon/>
+                  <HomeLocationTextField placeholder={"도착지점을 입력해주세요"} centered={true}/>
                   <TouchableOpacity><Search/></TouchableOpacity>
                 </SearchView>
               </SubContainer>
 
-              <Button onPress={() => navigate("CreateScreen")} color="#76A2EB" title="방 검색하기"/>
+              <SubContainer>
+                <SearchRoom onPress={() => navigate("CreateScreen")}>
+                  <SearchRoomText>방 검색하기</SearchRoomText>
+                </SearchRoom>
+              </SubContainer>
             </MainContainer>
           </ScrollView>
         </Container>
@@ -171,6 +194,12 @@ const CardTitle = styled.Text`
   margin-top: 16px;
 `;
 
+const MiniIconText = styled.Text`
+  color: white;
+  margin-top: -5px;
+`;
+
+
 const MiniIconContainer = styled.View`
   flex-direction: row;
   margin-top: 10;
@@ -232,3 +261,21 @@ const MyCampusInfo = styled.View`
   border-bottom-left-radius: 108;
   border-bottom-right-radius: 108;
 `;
+
+const SearchRoom = styled.TouchableOpacity`
+  margin-top: 40px;
+  width: 144px;
+  height: 34.5px;
+  background-color: #76A2EB;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  font-size: 11px;
+  border-radius: 17px;
+`;
+
+const SearchRoomText = styled.Text`
+  color: #FFFFFF;
+  font-size: 12px;
+`;
+

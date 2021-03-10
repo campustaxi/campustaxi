@@ -12,21 +12,23 @@ type Props = {
     height?: number;
     width?: number;
     borderWidth?: borderWidth;
+    boxShadow?: boxShadow;
 };
 
 export const ToggleButton: React.FC<Props> = ({
-                                                 children,
-                                                 onPress,
-                                                 icon,
-                                                 color,
-                                                 backgroundColor,
-                                                 borderColor,
-                                                 borderRadius,
-                                                 paddingBottom,
-                                                 height,
-                                                 width,
-                                                 borderWidth,
-                                             }) => {
+    children,
+    onPress,
+    icon,
+    color,
+    backgroundColor,
+    borderColor,
+    borderRadius,
+    paddingBottom,
+    height,
+    width,
+    borderWidth,
+    boxShadow,
+    }) => {
     return (
         <Box
             onPress={onPress}
@@ -36,7 +38,8 @@ export const ToggleButton: React.FC<Props> = ({
             paddingBottom={paddingBottom}
             height={height}
             width={width}
-            borderWidth={borderWidth}>
+            borderWidth={borderWidth}
+            boxShadow={boxShadow}>
             <Container>
                 {icon && <IconConatiner>{icon}</IconConatiner>}
                 <ChildrenText color={color}>{children}</ChildrenText>
@@ -66,13 +69,13 @@ const Box = styled.TouchableOpacity<BoxProps>`
   height: ${({ height }) => height && `${height}px`};
   width: ${({ width }) => width && `${width}px`};
   borderWidth: ${({ borderWidth }) => borderWidth && `${borderWidth}px`};
-  margin-left: 3px;
-  margin-right: 3px;
+  margin-left: 7px;
+  margin-right: 7px;
   
 `;
 
 const Container = styled.View`
-  flex-direction: row;
+  align-items: center;
   // padding-left: 64px;
   // padding-right: 64px;
   // padding-top: 16px;
@@ -80,7 +83,7 @@ const Container = styled.View`
 `;
 
 const IconConatiner = styled.View`
-  margin-right: 8px;
+  margin-bottom: 10px;
 `;
 
 const ChildrenText = styled.Text<{ color?: string }>`
